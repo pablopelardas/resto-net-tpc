@@ -2,22 +2,32 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row">
-        <div class="col-4">
-            <h2>Login</h2>
-            <div class="card">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Usuario</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Usuario">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput2" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="Contraseña">
-                </div>
-                <button type="button" class="btn btn-primary">Primary</button>
+    <style>
+        .container {
+            display: flex;
+        }
+    </style>
 
+    <div class="container">
+        <div class="form-signin w-100 m-auto">
+
+            <img class="mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUtT_9jt5iFJct-Wrgz91DpNN9ceZOsdglA&usqp=CAU" alt="" width="72" height="57">
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="Usuario">
+                <label for="floatingInput">Usuario</label>
             </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+                <label for="floatingPassword">Contraseña</label>
+            </div>
+
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
         </div>
     </div>
+
+
+
 
 </asp:Content>
