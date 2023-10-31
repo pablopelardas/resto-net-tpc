@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{A97FA27C-D2BB-4BCC-A6C0-EC4A2D58F743}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{1E2AD505-99CF-4F14-8038-394D38BFC1C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConnection", "TestConnection\TestConnection.csproj", "{1F2FFCC7-4E24-462D-AE98-86CB5E61D0A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{A97FA27C-D2BB-4BCC-A6C0-EC4A2D58F743}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A97FA27C-D2BB-4BCC-A6C0-EC4A2D58F743}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A97FA27C-D2BB-4BCC-A6C0-EC4A2D58F743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F2FFCC7-4E24-462D-AE98-86CB5E61D0A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F2FFCC7-4E24-462D-AE98-86CB5E61D0A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F2FFCC7-4E24-462D-AE98-86CB5E61D0A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F2FFCC7-4E24-462D-AE98-86CB5E61D0A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1F2FFCC7-4E24-462D-AE98-86CB5E61D0A6} = {1E2AD505-99CF-4F14-8038-394D38BFC1C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7984D01C-39D6-4991-ACD3-CEB86DBF0F87}
