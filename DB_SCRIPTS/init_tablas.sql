@@ -2,7 +2,11 @@ IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'RESTO-NET-TPC')
 BEGIN
   CREATE DATABASE "RESTO-NET-TPC";
 END;
+
 GO
+
+USE "RESTO-NET-TPC";
+
 CREATE TABLE empleados
 (
     id int IDENTITY(1,1) NOT NULL,
@@ -18,6 +22,7 @@ CREATE TABLE empleados
     direccion VARCHAR(50) NULL,
     localidad VARCHAR(50) NULL,
     provincia VARCHAR(50) NULL,
+    perfil VARCHAR(20) NOT NULL DEFAULT 'mesero',
     estado BIT NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (legajo),
@@ -29,6 +34,7 @@ CREATE TABLE empleados
     CHECK (fecha_egreso IS NULL OR fecha_ingreso <= fecha_egreso),
     CHECK (fecha_egreso IS NULL OR estado = 0),
     CHECK (fecha_egreso IS NOT NULL OR estado = 1),
+    CHECK (perfil IN ('mesero', 'gerente')),
 );
 
 CREATE TABLE usuarios
@@ -36,11 +42,9 @@ CREATE TABLE usuarios
     id int IDENTITY(1,1) NOT NULL,
     empleado_id int NOT NULL,
     contrasenia VARCHAR(50) NOT NULL,
-    perfil VARCHAR(20) NOT NULL DEFAULT 'empleado',
     PRIMARY KEY (id),
     FOREIGN KEY (empleado_id) REFERENCES empleados(id),
     UNIQUE (empleado_id),
-    CHECK (perfil IN ('empleado', 'administrador')),
 );
 
 CREATE TABLE mesas
