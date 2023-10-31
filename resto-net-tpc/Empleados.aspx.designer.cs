@@ -11,7 +11,7 @@ namespace resto_net_tpc
 {
 
 
-    public partial class Insumos
+    public partial class Empleados
     {
     }
 }
