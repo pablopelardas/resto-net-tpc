@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,14 @@
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB_SCRIPTS\drop_database.sql" />
+    <Content Include="DB_SCRIPTS\init_tablas.sql" />
+    <Content Include="DB_SCRIPTS\seeds.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DB_SCRIPTS\SP\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,74 +9,92 @@ namespace Data
 {
     public class AccesoDatos
     {
-        private SqlConnection conecion;
-        private SqlCommand comando;
-        private SqlDataReader lector;
+        private SqlConnection connection;
+        private SqlCommand command;
+        private SqlDataReader reader;
 
-        public SqlDataReader Lector
+        public SqlDataReader Reader
         {
-            get { return lector; }
+            get { return reader; }
         }
 
         public AccesoDatos()
         {
-            conecion = new SqlConnection("Cadena de conexion..");
-            comando = new SqlCommand();
+            connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            command = new SqlCommand();
         }
 
-        public void setQuery(string query)
+        public void SetQuery(string query)
         {
-            comando.CommandType = System.Data.CommandType.Text;
-            comando.CommandText = query;
+            command.CommandType = System.Data.CommandType.Text;
+            command.CommandText = query;
+        }
+        public void SetProcedure(string sp)
+        {
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.CommandText = sp;
         }
 
-        public void ejecutarLectura()
+        public void SetParameter(string name, object value)
         {
-            comando.Connection = conecion;
+            command.Parameters.AddWithValue(name, value);
+        }
+
+        public void ReadData()
+        {
+            command.Connection = connection;
+
             try
             {
-                if (conecion.State != System.Data.ConnectionState.Open) 
-                    conecion.Open();
-                lector = comando.ExecuteReader();
-
+                if (connection.State != System.Data.ConnectionState.Open) connection.Open();
+                reader = command.ExecuteReader();
             }
             catch (Exception ex)
             {
+                connection.Close();
                 throw ex;
             }
         }
 
-        public void cerrarConexion()
+        public void ExecuteNonQuery()
         {
-            if (lector != null)
-                lector.Close();
-            conecion.Close();
-        }
+            command.Connection = connection;
 
-        public void setParametro(string nombre, object valor)
-        {
-            comando.Parameters.AddWithValue(nombre, valor);
-        }
-
-        public void setProcedure(string sp)
-        {
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.CommandText = sp;
-        }
-
-        public void ejecutarAccion()
-        {
-            comando.Connection = conecion;
             try
             {
-                if (conecion.State != System.Data.ConnectionState.Open)
-                    conecion.Open();
-                comando.ExecuteNonQuery();
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+                command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
+                connection.Close();
                 throw ex;
             }
         }
+
+        public int ExecuteScalar()
+        {
+            command.Connection = connection;
+
+            try
+            {
+                if (connection.State != System.Data.ConnectionState.Open)
+                    connection.Open();
+                return (int)command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                throw ex;
+            }
+        }
+
+        public void CloseConnection()
+        {
+            if (reader != null) reader.Close();
+            connection.Close();
+        }
+
     }
 }
