@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace resto_net_tpc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            MeseroNegocio meseroNegocio = new MeseroNegocio();
+            dgvEmpleados.DataSource = meseroNegocio.listar();
+            dgvEmpleados.DataBind();
         }
     }
 }
