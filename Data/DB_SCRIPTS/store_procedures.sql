@@ -123,8 +123,7 @@ GO
 CREATE PROCEDURE [dbo].[spObtenerTodosLosEmpleados]
 AS
 BEGIN
-    SELECT *
-    FROM empleados;
+    SELECT * FROM empleados
 END
 GO
 

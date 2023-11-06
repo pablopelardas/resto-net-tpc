@@ -29,7 +29,7 @@
             </div>
 
             <div>
-                <a href="Mesas.aspx" class="btn btn-primary">Ingresar</a>
+                <a href="Administracion.aspx" class="btn btn-primary">Ingresar</a>
             </div>
 
         </div>

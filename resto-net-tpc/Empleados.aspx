@@ -3,11 +3,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="row">
-        <h2>Empleados</h2>
+        <div class="d-flex justify-content-center">
+            <h2>Empleados</h2>
+        </div>
     </div>
 
     <div class="row">
-        <asp:GridView ID="dgvEmpleados" runat="server"></asp:GridView>
+        <asp:GridView ID="dgvEmpleados" DataKeyNames="Id"
+            CssClass="table table-dark" OnSelectedIndexChanged="dgvEmpleados_SelectedIndexChanged"
+            AutoGenerateColumns="false" runat="server">
+            <Columns>
+                <asp:BoundField HeaderText="Legajo" DataField="Legajo" />
+                <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
+                <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                <asp:BoundField HeaderText="Fecha Ingreso" DataField="FechaIngreso" />
+                <asp:BoundField HeaderText="Fecha Egreso" DataField="FechaEgreso" />
+                <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
+                <asp:CommandField ShowSelectButton="true" SelectText="Editar" HeaderText="Modificar" />
+            </Columns>
+        </asp:GridView>
+        <a href="FormularioEmpleado.aspx">Agregar</a>
     </div>
 
 </asp:Content>

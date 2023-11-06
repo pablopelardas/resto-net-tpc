@@ -16,5 +16,11 @@ namespace resto_net_tpc
             dgvEmpleados.DataSource = meseroNegocio.listar();
             dgvEmpleados.DataBind();
         }
+
+        protected void dgvEmpleados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string Id = dgvEmpleados.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioEmpleado.aspx?id=" + Id, false);
+        }
     }
 }

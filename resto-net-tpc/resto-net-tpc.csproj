@@ -121,6 +121,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Empleados.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="FormularioEmpleado.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Insumos.aspx" />
     <Content Include="Login.aspx" />
@@ -205,6 +206,13 @@
     </Compile>
     <Compile Include="Empleados.aspx.designer.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioEmpleado.aspx.cs">
+      <DependentUpon>FormularioEmpleado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioEmpleado.aspx.designer.cs">
+      <DependentUpon>FormularioEmpleado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
