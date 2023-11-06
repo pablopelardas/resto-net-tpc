@@ -10,6 +10,7 @@ namespace Negocio
 {
     public class MeseroNegocio
     {
+        // Falta validar los null del metodo listar.
         public List<Mesero> listar()
         {
             List<Mesero> lista = new List<Mesero>();
@@ -47,6 +48,45 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
+            }
+        }
+
+        public void agregar(Mesero mesero)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetProcedure("spAgregarEmpleadoYUsuario");
+                datos.SetParameter("@legajo", mesero.Legajo);
+                datos.SetParameter("@apellido", mesero.Apellido);
+                datos.SetParameter("@nombre", mesero.Nombre);
+                datos.SetParameter("@dni", mesero.Dni);
+                datos.SetParameter("@fecha_nacimiento", mesero.FechaNacimiento);
+                datos.SetParameter("@fecha_ingreso", mesero.FechaIngreso);
+                datos.SetParameter("@telefono", mesero.Telefono);
+                datos.SetParameter("@email", mesero.Email);
+                datos.SetParameter("@direccion", mesero.Direccion);
+                datos.SetParameter("@localidad", mesero.Localidad);
+                datos.SetParameter("@provincia", mesero.Provincia);
+                datos.SetParameter("@perfil", mesero.Perfil);
+                datos.SetParameter("@estado", mesero.Estado);
+                datos.SetParameter("@contrasenia", mesero.Perfil);
+
+                datos.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
             }
         }
     }

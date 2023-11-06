@@ -54,15 +54,11 @@
                 <asp:TextBox ID="tBoxProvincia" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <asp:Label ID="lblPerfil" CssClass="form-label" runat="server" Text="Perfil"></asp:Label>
-                <asp:TextBox ID="tBoxPerfil" CssClass="form-control" runat="server"></asp:TextBox>
-            </div>
-            <div class="mb-3">
                 <asp:Label ID="lblPass" CssClass="form-label" runat="server" Text="Contraseña"></asp:Label>
-                <asp:TextBox ID="tBoxPass" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="tBoxPass" CssClass="form-control" TextMode="Password" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <asp:Button ID="btnAceptar" CssClass="btn btn-primary" runat="server" Text="Aceptar" />
+                <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary" runat="server" Text="Aceptar" />
                 <a href="Empleados.aspx" class="btn btn-danger">Cancelar</a>
             </div>
 

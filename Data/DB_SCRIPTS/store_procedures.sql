@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spAgregarEmpleadoYUsuario]
+ALTER PROCEDURE spAgregarEmpleadoYUsuario
     @legajo VARCHAR(10),
     @apellido VARCHAR(50),
     @nombre VARCHAR(50),
@@ -24,15 +24,15 @@ AS
 BEGIN
     -- Insertar el empleado
     INSERT INTO empleados (legajo, apellido, nombre, dni, fecha_nacimiento, fecha_ingreso, telefono, email, direccion, localidad, provincia, perfil, estado)
-    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @perfil, @estado);
+    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @perfil, @estado)
 
-    -- Obtener el ID del empleado recién insertado
-    DECLARE @empleado_id INT;
-    SET @empleado_id = SCOPE_IDENTITY();
+	-- Obtengo el id del ultimo empleado agregago
+	Declare @empleado_id int
+	Set @empleado_id = (Select Top(1) id From empleados Order by id desc)
 
     -- Insertar el usuario asociado al empleado
     INSERT INTO usuarios (empleado_id, contrasenia)
-    VALUES (@empleado_id, @contrasenia);
+    VALUES (@empleado_id, @contrasenia)
 END
 GO
 

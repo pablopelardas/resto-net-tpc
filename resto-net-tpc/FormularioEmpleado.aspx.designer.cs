@@ -231,24 +231,6 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxProvincia;
 
         /// <summary>
-        /// Control lblPerfil.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPerfil;
-
-        /// <summary>
-        /// Control tBoxPerfil.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tBoxPerfil;
-
-        /// <summary>
         /// Control lblPass.
         /// </summary>
         /// <remarks>
