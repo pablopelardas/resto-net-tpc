@@ -1,12 +1,12 @@
 -- Date: 2023/10/31 12:00:00
 
 -- ============================================= EMPLEADOS =============================================
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[spAgregarEmpleadoYUsuario]
-    @legajo VARCHAR(10),
     @apellido VARCHAR(50),
     @nombre VARCHAR(50),
     @dni VARCHAR(10),
@@ -22,17 +22,35 @@ CREATE PROCEDURE [dbo].[spAgregarEmpleadoYUsuario]
     @contrasenia VARCHAR(50)
 AS
 BEGIN
+    DECLARE @legajo VARCHAR(10);
+    DECLARE @ultimoLegajo INT;
+
+    -- Determinar el tipo de empleado (M para mesero, G para gerente)
+    SET @legajo = 'E' + (CASE WHEN @perfil = 'gerente' THEN 'G' ELSE 'M' END);
+
+    -- Buscar el último legajo de empleados del mismo tipo (M o G)
+    SELECT TOP 1 @ultimoLegajo = CAST(SUBSTRING(legajo, 3, 4) AS INT)
+    FROM empleados
+    WHERE SUBSTRING(legajo, 1, 2) = @legajo
+    ORDER BY CAST(SUBSTRING(legajo, 3, 4) AS INT) DESC;
+
+    -- Incrementar el número del legajo
+    SET @ultimoLegajo = ISNULL(@ultimoLegajo, 0) + 1;
+
+    -- Formatear el número del legajo a 4 dígitos
+    SET @legajo = @legajo + RIGHT('0000' + CAST(@ultimoLegajo AS VARCHAR), 4);
+
     -- Insertar el empleado
     INSERT INTO empleados (legajo, apellido, nombre, dni, fecha_nacimiento, fecha_ingreso, telefono, email, direccion, localidad, provincia, perfil, estado)
-    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @perfil, @estado)
+    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @perfil, @estado);
 
-	-- Obtengo el id del ultimo empleado agregago
-	Declare @empleado_id int
-	Set @empleado_id = (Select Top(1) id From empleados Order by id desc)
+    -- Obtener el ID del empleado recién insertado
+    DECLARE @empleado_id INT;
+    SET @empleado_id = SCOPE_IDENTITY();
 
     -- Insertar el usuario asociado al empleado
     INSERT INTO usuarios (empleado_id, contrasenia)
-    VALUES (@empleado_id, @contrasenia)
+    VALUES (@empleado_id, @contrasenia);
 END
 GO
 
@@ -124,8 +142,33 @@ CREATE PROCEDURE [dbo].[spObtenerTodosLosEmpleados]
 AS
 BEGIN
     SELECT * FROM empleados
+    WHERE deleted_at IS NULL;
 END
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spObtenerEmpleadosEliminados]
+AS
+BEGIN
+	SELECT * FROM empleados
+    WHERE deleted_at IS NOT NULL;
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spRestaurarEmpleado]
+	@id INT
+AS
+BEGIN
+	UPDATE empleados
+	SET estado = 1, fecha_egreso = NULL, deleted_at = NULL
+	WHERE id = @id;
+END
 
 -- ============================================= INSUMOS =============================================
 
