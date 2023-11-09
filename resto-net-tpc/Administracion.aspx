@@ -9,6 +9,9 @@
         <div class="col-3">
             <a href="/Mesas.aspx">Administrar Mesas</a>
         </div>
+        <div>
+            <a href="/Insumos.aspx">Administrar insumos</a>
+        </div>
 
     </div>
 
