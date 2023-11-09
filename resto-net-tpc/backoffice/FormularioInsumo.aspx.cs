@@ -11,6 +11,8 @@ namespace resto_net_tpc
 {
     public partial class FormularioInsumo : System.Web.UI.Page
     {
+        public int Id { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Configuracion inicial de la pantalla.
@@ -24,12 +26,13 @@ namespace resto_net_tpc
             }
 
             // Si esta modificando.
-            if (Request.QueryString["id"] != null && !IsPostBack)
+            Id = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"]) : -1;
+            if (Id != -1 && !IsPostBack)
             {
                 Insumo insumo = new Insumo();
                 InsumoNegocio negocio = new InsumoNegocio();
 
-                insumo = negocio.BuscarInsumo(int.Parse(Request.QueryString["id"]));
+                insumo = negocio.BuscarInsumo(Id);
 
                 tBoxNombre.Text = insumo.Nombre;
                 ddlCategoria.SelectedValue = insumo.Categoria.Id.ToString();
@@ -53,9 +56,9 @@ namespace resto_net_tpc
                 insumo.StockMinimo = int.Parse(tBoxStockMinimo.Text);
                 insumo.Precio = decimal.Parse(tBoxPrecio.Text);
 
-                if (Request.QueryString["id"] != null)
+                if (Id != -1)
                 {
-                    insumo.Id = int.Parse(Request.QueryString["id"]);
+                    insumo.Id = Id;
                     negocio.Modificar(insumo);
                 }
                 else
@@ -70,6 +73,21 @@ namespace resto_net_tpc
                 Session.Add("error", ex);
                 throw ex;
                 // Redireccionar a pagina de error..
+            }
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            InsumoNegocio negocio = new InsumoNegocio();
+            
+            try
+            {
+                negocio.Eliminar(Id);
+                Response.Redirect("Insumos.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

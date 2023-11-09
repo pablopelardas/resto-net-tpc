@@ -171,7 +171,6 @@ BEGIN
 END
 
 -- ============================================= INSUMOS =============================================
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -234,7 +233,7 @@ GO
 CREATE PROCEDURE [dbo].[spObtenerTodosLosInsumos]
 AS
 BEGIN
-    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id
+    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.estado = 1
 END
 GO
 
