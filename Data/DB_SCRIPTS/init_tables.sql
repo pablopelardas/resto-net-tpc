@@ -55,13 +55,12 @@ CREATE TABLE mesas
 (
     id int IDENTITY(1,1) NOT NULL,
     numero int NOT NULL,
+    estado BIT NOT NULL DEFAULT 1,
     capacidad int NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'libre',
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
     UNIQUE (numero),
-    CHECK (estado IN ('libre', 'ocupada', 'reservada')),
 );
 
 CREATE table mesas_asignadas
@@ -69,6 +68,7 @@ CREATE table mesas_asignadas
     id int IDENTITY(1,1) NOT NULL,
     mesa_id int NOT NULL,
     empleado_id int NOT NULL,
+    estado VARCHAR(20) NOT NULL DEFAULT 'libre',
     fecha DATE NOT NULL,
     turno VARCHAR(20) NOT NULL,
     deleted_at DATETIME NULL DEFAULT NULL,
@@ -78,6 +78,7 @@ CREATE table mesas_asignadas
     FOREIGN KEY (empleado_id) REFERENCES empleados(id),
     UNIQUE (mesa_id, fecha),
     CHECK (turno IN ('almuerzo', 'cena')),
+    CHECK (estado IN ('libre', 'ocupada', 'reservada')),
 );
 
 CREATE TABLE pedidos

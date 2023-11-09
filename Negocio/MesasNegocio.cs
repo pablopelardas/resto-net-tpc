@@ -50,7 +50,6 @@ namespace Negocio
                 datos.SetProcedure("spAgregarMesa");
                 datos.SetParameter("@numero", mesa.Numero);
                 datos.SetParameter("@capacidad", mesa.Capacidad);
-                datos.SetParameter("@estado", mesa.Estado);
 
 
                 datos.ExecuteNonQuery();
@@ -58,7 +57,12 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw ex;
+                if (ex.Message.Contains("001"))
+                {
+                    throw new Exception("Ya existe una mesa activa con ese numero");
+                }
+                else
+                { throw ex; }
             }
             finally
             {
@@ -98,7 +102,7 @@ namespace Negocio
             mesa.Id = (int)accesoDatos.Reader["id"];
             mesa.Capacidad = (int)accesoDatos.Reader["capacidad"];
             mesa.Numero = (int)accesoDatos.Reader["numero"];
-            mesa.Estado = (string)accesoDatos.Reader["estado"];
+            mesa.Estado = (bool)accesoDatos.Reader["estado"];
             return mesa;
         }
 

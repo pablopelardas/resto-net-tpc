@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DB_SCRIPTS\drop_database.sql" />
-    <Content Include="DB_SCRIPTS\init_tablas.sql" />
     <Content Include="DB_SCRIPTS\seeds.sql" />
   </ItemGroup>
   <ItemGroup>
