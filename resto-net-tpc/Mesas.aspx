@@ -15,11 +15,16 @@
             <Columns>
                 <asp:BoundField HeaderText="Número" DataField="Numero" />
                 <asp:BoundField HeaderText="Capacidad" DataField="Capacidad" />
-                <asp:BoundField HeaderText="Estado" DataField="Estado" />
+                <%-- Create a TemplateField showing activo o inactivo in stead of estado true or false --%>
+                <asp:TemplateField HeaderText="Estado">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblEstado" runat="server" Text='<%# Convert.ToBoolean(Eval("Estado")) ? "Activa" : "Inactiva" %>'></asp:Label>
+                                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:CommandField ShowSelectButton="true" SelectText="Editar" HeaderText="Modificar" />
             </Columns>
         </asp:GridView>
-        <a href="FormularioEmpleado.aspx">Agregar</a>
+        <a href="FormularioMesa.aspx">Agregar</a>
     </div>
 
 </asp:Content>

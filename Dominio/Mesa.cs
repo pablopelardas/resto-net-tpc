@@ -13,14 +13,14 @@ namespace Dominio
 
         public int Capacidad { get; set; }
 
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
 
     public Mesa()
         {
             
         }
 
-    public Mesa(int id, int numero, int capacidad, string estado)
+    public Mesa(int id, int numero, int capacidad, bool estado)
         {
             Id = id;
             Numero = numero;

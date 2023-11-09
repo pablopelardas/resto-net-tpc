@@ -17,28 +17,18 @@ VALUES
 
 --seed mesas
 INSERT INTO mesas
-    (numero, capacidad, estado)
+    (numero, capacidad)
 VALUES
-    (1, 4, 'libre'),
-    (2, 4, 'libre'),
-    (3, 4, 'libre'),
-    (4, 4, 'libre'),
-    (5, 4, 'libre'),
-    (6, 4, 'libre'),
-    (7, 4, 'libre'),
-    (8, 4, 'libre'),
-    (9, 4, 'libre'),
-    (10, 4, 'libre'),
-    (11, 4, 'libre'),
-    (12, 4, 'libre'),
-    (13, 4, 'libre'),
-    (14, 4, 'libre'),
-    (15, 4, 'libre'),
-    (16, 4, 'libre'),
-    (17, 4, 'libre'),
-    (18, 4, 'libre'),
-    (19, 4, 'libre'),
-    (20, 4, 'libre');
+    (1, 4),
+    (2, 6 ),
+    (3, 8 ),
+    (4, 4 ),
+    (5, 2 ),
+    (6, 2 ),
+    (7, 2 ),
+    (8, 8 ),
+    (9, 4 ),
+    (10, 2 );
 
 --seed categorias
 INSERT INTO categorias

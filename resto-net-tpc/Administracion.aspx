@@ -5,6 +5,9 @@
     <div class="row">
         <div class="col-3">
             <a href="/Empleados.aspx">Administrar empleados</a>
+        </div>        
+        <div class="col-3">
+            <a href="/Mesas.aspx">Administrar Mesas</a>
         </div>
 
     </div>

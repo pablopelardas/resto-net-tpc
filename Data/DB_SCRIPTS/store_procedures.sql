@@ -303,11 +303,36 @@ GO
 CREATE PROCEDURE [dbo].[spAgregarMesa]
     @numero INT,
     @capacidad INT,
-    @estado VARCHAR(20)
+    @estado BIT = 1
 AS
 BEGIN
-    INSERT INTO mesas (numero, capacidad, estado)
-    VALUES (@numero, @capacidad, @estado);
+    DECLARE @mesa_id INT;
+    DECLARE @deleted_at DATETIME;
+
+    SELECT @mesa_id = id, @deleted_at = deleted_at
+    FROM mesas
+	WHERE numero = @numero
+
+
+    IF @mesa_id IS NOT NULL
+    BEGIN
+        IF @deleted_at IS NULL
+        BEGIN
+            RAISERROR('001:Ya existe una mesa con ese número', 16, 1);
+        END
+        ELSE
+        BEGIN
+            UPDATE mesas
+            SET deleted_at = NULL, capacidad = @capacidad, estado = 1
+            WHERE id = @mesa_id;
+		END
+    END
+    ELSE
+    BEGIN
+        -- Si no existe una mesa eliminada con ese número, crear una nueva mesa
+        INSERT INTO mesas (numero, capacidad, estado)
+        VALUES (@numero, @capacidad, @estado);
+    END
 END
 GO
 
@@ -320,15 +345,44 @@ CREATE PROCEDURE [dbo].[spActualizarMesa]
     @id INT,
     @numero INT,
     @capacidad INT,
-    @estado VARCHAR(20)
+    @estado BIT = 1
 AS
 BEGIN
+    DECLARE @mesa_id INT;
+    DECLARE @deleted_at DATETIME;
+
+    SELECT @mesa_id = id, @deleted_at = deleted_at
+    FROM mesas
+	WHERE numero = @numero
+
+    IF @mesa_id IS NOT NULL
+    BEGIN
+        IF @deleted_at IS NULL
+        BEGIN
+            RAISERROR('001:Ya existe una mesa con ese número', 16, 1);
+        END
+        ELSE
+        BEGIN
+            UPDATE mesas
+            SET numero = null
+            WHERE id = @mesa_id;
+
+            UPDATE mesas
+            SET numero = @numero,
+				capacidad = @capacidad,
+				estado = @estado
+			WHERE id = @id;
+		END
+    END
+    ELSE
+    BEGIN
     UPDATE mesas
     SET
         numero = @numero,
         capacidad = @capacidad,
         estado = @estado
     WHERE id = @id;
+    END
 END
 GO
 
@@ -370,7 +424,8 @@ CREATE PROCEDURE [dbo].[spObtenerTodasLasMesas]
 AS
 BEGIN
     SELECT *
-    FROM mesas;
+    FROM mesas
+    WHERE deleted_at IS NULL;
 END
 GO
 

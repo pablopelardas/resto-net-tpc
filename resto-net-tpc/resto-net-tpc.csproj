@@ -119,6 +119,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="FormularioMesa.aspx" />
     <Content Include="Mesas.aspx" />
     <Content Include="Empleados.aspx" />
     <Content Include="favicon.ico" />
@@ -201,6 +202,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="FormularioMesa.aspx.cs">
+      <DependentUpon>FormularioMesa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioMesa.aspx.designer.cs">
+      <DependentUpon>FormularioMesa.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Mesas.aspx.cs">
       <DependentUpon>Mesas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

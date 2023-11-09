@@ -1,51 +1,35 @@
--- DROP TABLES
-
-USE "RESTO-NET-TPC";
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[factura_pagos]') AND type in (N'U'))
-DROP TABLE [dbo].[factura_pagos]
+USE	MASTER
 GO
+DECLARE	@Spid INT
+DECLARE	@ExecSQL VARCHAR(255)
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[facturas]') AND type in (N'U'))
-DROP TABLE [dbo].[facturas]
-GO
+DECLARE	KillCursor CURSOR LOCAL STATIC READ_ONLY FORWARD_ONLY
+FOR
+SELECT	DISTINCT SPID
+FROM	MASTER..SysProcesses
+WHERE	DBID = DB_ID('RESTO-NET-TPC')
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pedidos_detalle]') AND type in (N'U'))
-DROP TABLE [dbo].[menu_insumos_pedidos]
-GO
+OPEN	KillCursor
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[menu_insumos]') AND type in (N'U'))
-DROP TABLE [dbo].[menu_insumos]
-GO
+-- Grab the first SPID
+FETCH	NEXT
+FROM	KillCursor
+INTO	@Spid
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[menus]') AND type in (N'U'))
-DROP TABLE [dbo].[menus]
-GO
+WHILE	@@FETCH_STATUS = 0
+	BEGIN
+		SET		@ExecSQL = 'KILL ' + CAST(@Spid AS VARCHAR(50))
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[insumos]') AND type in (N'U'))
-DROP TABLE [dbo].[insumos]
-GO
+		EXEC	(@ExecSQL)
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[categorias]') AND type in (N'U'))
-DROP TABLE [dbo].[categorias]
-GO
+		-- Pull the next SPID
+        FETCH	NEXT 
+		FROM	KillCursor 
+		INTO	@Spid  
+	END
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pedidos]') AND type in (N'U'))
-DROP TABLE [dbo].[pedidos]
-GO
+CLOSE	KillCursor
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[mesas_asignadas]') AND type in (N'U'))
-DROP TABLE [dbo].[mesas_asignadas]
-GO
+DEALLOCATE	KillCursor
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[mesas]') AND type in (N'U'))
-DROP TABLE [dbo].[mesas]
-GO
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usuarios]') AND type in (N'U'))
-DROP TABLE [dbo].[usuarios]
-GO
-
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[empleados]') AND type in (N'U'))
-DROP TABLE [dbo].[empleados]
-GO
+DROP DATABASE [RESTO-NET-TPC]
