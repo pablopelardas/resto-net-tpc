@@ -3,12 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="row">
-        <div class="col-6">
-
-            <div class="mb-3">
-                <asp:Label ID="lblId" CssClass="form-label" runat="server" Text="Id"></asp:Label>
-                <asp:TextBox ID="tBoxId" CssClass="form-control" runat="server"></asp:TextBox>
-            </div>
+        <div class="col-12 d-flex flex-column align-items-center">
             <div class="mb-3">
                 <asp:Label ID="lblLegajo" CssClass="form-label" runat="server" Text="Legajo"></asp:Label>
                 <asp:TextBox ID="tBoxLegajo" CssClass="form-control" runat="server"></asp:TextBox>

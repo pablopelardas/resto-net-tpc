@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE spAgregarEmpleadoYUsuario
+CREATE PROCEDURE [dbo].[spAgregarEmpleadoYUsuario]
     @legajo VARCHAR(10),
     @apellido VARCHAR(50),
     @nombre VARCHAR(50),

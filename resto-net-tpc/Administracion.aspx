@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-3">
-            <a href="Empleados.aspx">Administrar empleados</a>
+            <a href="/Empleados.aspx">Administrar empleados</a>
         </div>
 
     </div>
