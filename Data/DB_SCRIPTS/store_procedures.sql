@@ -288,8 +288,7 @@ GO
 CREATE PROCEDURE [dbo].[spObtenerTodasLasCategorias]
 AS
 BEGIN
-    SELECT *
-    FROM categorias;
+	select id, nombre from categorias
 END
 GO
 

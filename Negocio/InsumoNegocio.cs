@@ -49,5 +49,11 @@ namespace Negocio
 				datos.CloseConnection();
 			}
         }
+
+		public void Agregar(Insumo insumo)
+		{
+
+		}
+
     }
 }

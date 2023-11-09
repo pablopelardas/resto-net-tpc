@@ -16,8 +16,10 @@
                 <asp:BoundField HeaderText="Stock" DataField="Stock" />
                 <asp:BoundField HeaderText="Stock minimo" DataField="StockMinimo" />
                 <asp:BoundField HeaderText="Precio" DataField="Precio" />
+                <asp:CommandField ShowSelectButton="true" SelectText="Editar" HeaderText="Modificar" />
             </Columns>
         </asp:GridView>
+        <a href="FormularioInsumo.aspx">Agregar</a>
     </div>
 
 </asp:Content>
