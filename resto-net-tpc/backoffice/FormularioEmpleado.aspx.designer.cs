@@ -33,6 +33,15 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxLegajo;
 
         /// <summary>
+        /// lblErrorLegajo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorLegajo;
+
+        /// <summary>
         /// lblApellido control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace resto_net_tpc
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tBoxApellido;
+
+        /// <summary>
+        /// lblErrorApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorApellido;
 
         /// <summary>
         /// lblNombre control.
@@ -69,6 +87,15 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxNombre;
 
         /// <summary>
+        /// lblErrorNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorNombre;
+
+        /// <summary>
         /// lblDNI control.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,15 @@ namespace resto_net_tpc
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tBoxDNI;
+
+        /// <summary>
+        /// lblErrorDNI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorDNI;
 
         /// <summary>
         /// lblFechaNacimiento control.
@@ -105,6 +141,15 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxFechaNacimiento;
 
         /// <summary>
+        /// lblErrorFechaNacimiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorFechaNacimiento;
+
+        /// <summary>
         /// lblFechaIngreso control.
         /// </summary>
         /// <remarks>
@@ -121,6 +166,15 @@ namespace resto_net_tpc
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tBoxFechaIngreso;
+
+        /// <summary>
+        /// lblErrorFechaIngreso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorFechaIngreso;
 
         /// <summary>
         /// lblTelefono control.
@@ -141,6 +195,15 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxTelefono;
 
         /// <summary>
+        /// lblErrorTelefono control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorTelefono;
+
+        /// <summary>
         /// lblEmail control.
         /// </summary>
         /// <remarks>
@@ -157,6 +220,15 @@ namespace resto_net_tpc
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tBoxEmail;
+
+        /// <summary>
+        /// lblErrorEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorEmail;
 
         /// <summary>
         /// lblDireccion control.
@@ -177,6 +249,15 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxDireccion;
 
         /// <summary>
+        /// lblErrorDireccion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorDireccion;
+
+        /// <summary>
         /// lblLocalidad control.
         /// </summary>
         /// <remarks>
@@ -193,6 +274,15 @@ namespace resto_net_tpc
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tBoxLocalidad;
+
+        /// <summary>
+        /// lblErrorLocalidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorLocalidad;
 
         /// <summary>
         /// lblProvincia control.
@@ -213,6 +303,15 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxProvincia;
 
         /// <summary>
+        /// lblErrorProvincia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorProvincia;
+
+        /// <summary>
         /// lblPass control.
         /// </summary>
         /// <remarks>
@@ -231,13 +330,22 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.TextBox tBoxPass;
 
         /// <summary>
-        /// lblError control.
+        /// lblErrorPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.WebControls.Label lblErrorPass;
+
+        /// <summary>
+        /// lblErrorGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorGeneral;
 
         /// <summary>
         /// btnAceptar control.
