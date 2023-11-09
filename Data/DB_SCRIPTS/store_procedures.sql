@@ -185,7 +185,7 @@ CREATE PROCEDURE [dbo].[spAgregarInsumo]
 AS
 BEGIN
     INSERT INTO insumos (categoria_id, nombre, stock, stock_minimo, precio)
-    VALUES (@categoria_id, @nombre, @stock, @stock_minimo, @precio);
+    VALUES (@categoria_id, @nombre, @stock, @stock_minimo, @precio)
 END
 GO
 

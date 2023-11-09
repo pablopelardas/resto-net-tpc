@@ -17,32 +17,32 @@
             <div class="mb-3">
                 <asp:Label ID="lblNombre" CssClass="form-label" runat="server" Text="Nombre"></asp:Label>
                 <asp:TextBox ID="tBoxNombre" CssClass="form-control" runat="server"></asp:TextBox>
-<asp:Label ID="lblErrorNombre" CssClass="error-label" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblErrorNombre" CssClass="error-label" runat="server" Text=""></asp:Label>
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblDNI" CssClass="form-label" runat="server" Text="DNI"></asp:Label>
                 <asp:TextBox ID="tBoxDNI" CssClass="form-control" runat="server"></asp:TextBox>
-<asp:Label ID="lblErrorDNI" CssClass="error-label" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblErrorDNI" CssClass="error-label" runat="server" Text=""></asp:Label>
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblFechaNacimiento" CssClass="form-label" runat="server" Text="Fecha de nacimiento"></asp:Label>
                 <asp:TextBox ID="tBoxFechaNacimiento" TextMode="Date" CssClass="form-control" runat="server"></asp:TextBox>
-<asp:Label ID="lblErrorFechaNacimiento" CssClass="error-label" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblErrorFechaNacimiento" CssClass="error-label" runat="server" Text=""></asp:Label>
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblFechaIngreso" CssClass="form-label" runat="server" Text="Fecha de ingreso"></asp:Label>
                 <asp:TextBox ID="tBoxFechaIngreso" TextMode="Date" CssClass="form-control" runat="server"></asp:TextBox>
-<asp:Label ID="lblErrorFechaIngreso" CssClass="error-label" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblErrorFechaIngreso" CssClass="error-label" runat="server" Text=""></asp:Label>
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblTelefono" CssClass="form-label" runat="server" Text="Telefono"></asp:Label>
                 <asp:TextBox ID="tBoxTelefono" CssClass="form-control" runat="server"></asp:TextBox>
-<asp:Label ID="lblErrorTelefono" CssClass="error-label" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblErrorTelefono" CssClass="error-label" runat="server" Text=""></asp:Label>
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblEmail" CssClass="form-label" runat="server" Text="Email"></asp:Label>
                 <asp:TextBox ID="tBoxEmail" TextMode="Email" CssClass="form-control" runat="server"></asp:TextBox>
-<asp:Label ID="lblErrorEmail" CssClass="error-label" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblErrorEmail" CssClass="error-label" runat="server" Text=""></asp:Label>
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblDireccion" CssClass="form-label" runat="server" Text="Direccion"></asp:Label>
@@ -78,7 +78,7 @@
         </div>
     </div>
     <style>
-.error-label {
+        .error-label {
             color: red;
         }
     </style>

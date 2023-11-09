@@ -203,6 +203,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="backoffice\FormularioInsumo.aspx.cs">
+      <DependentUpon>FormularioInsumo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backoffice\FormularioInsumo.aspx.designer.cs">
+      <DependentUpon>FormularioInsumo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="backoffice\FormularioMesa.aspx.cs">
       <DependentUpon>FormularioMesa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

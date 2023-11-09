@@ -18,16 +18,16 @@
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblStockMinimo" CssClass="form-label" runat="server" Text="Stock minimo"></asp:Label>
-                <asp:TextBox ID="tBoxMinimo" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="tBoxStockMinimo" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <asp:Label ID="lblPrecio" CssClass="form-label" runat="server" Text="Precio"></asp:Label>
                 <asp:TextBox ID="tBoxPrecio" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
-           
+         
            
             <div class="mb-3">
-                <asp:Button ID="btnAceptar" CssClass="btn btn-primary" runat="server" Text="Aceptar" />
+                <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary" runat="server" Text="Aceptar" />
                 <a href="Insumos.aspx" class="btn btn-secondary">Cancelar</a>
                 <asp:Button ID="btnEliminar" CssClass="btn btn-danger" runat="server" Text="Eliminar" />
             </div>

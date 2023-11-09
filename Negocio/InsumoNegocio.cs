@@ -1,6 +1,7 @@
 ﻿using Data;
 using Dominio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,7 +53,27 @@ namespace Negocio
 
 		public void Agregar(Insumo insumo)
 		{
+			AccesoDatos datos = new AccesoDatos();
 
+			try
+			{
+				datos.SetProcedure("spAgregarInsumo");
+				datos.SetParameter("@categoria_id", insumo.Categoria.Id);
+				datos.SetParameter("@nombre", insumo.Nombre);
+				datos.SetParameter("@stock", insumo.Stock);
+				datos.SetParameter("@stock_minimo", insumo.StockMinimo);
+				datos.SetParameter("@precio", insumo.Precio);
+
+                datos.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.CloseConnection();
+			}
 		}
 
     }
