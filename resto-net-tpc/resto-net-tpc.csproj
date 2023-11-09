@@ -119,15 +119,15 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="FormularioMesa.aspx" />
-    <Content Include="Mesas.aspx" />
-    <Content Include="Empleados.aspx" />
+    <Content Include="backoffice\FormularioMesa.aspx" />
+    <Content Include="backoffice\Mesas.aspx" />
+    <Content Include="backoffice\Empleados.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="FormularioEmpleado.aspx" />
+    <Content Include="backoffice\FormularioEmpleado.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Insumos.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="AsignarMesas.aspx" />
+    <Content Include="MesasAsignadas.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -202,32 +202,32 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="FormularioMesa.aspx.cs">
+    <Compile Include="backoffice\FormularioMesa.aspx.cs">
       <DependentUpon>FormularioMesa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormularioMesa.aspx.designer.cs">
+    <Compile Include="backoffice\FormularioMesa.aspx.designer.cs">
       <DependentUpon>FormularioMesa.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Mesas.aspx.cs">
+    <Compile Include="backoffice\Mesas.aspx.cs">
       <DependentUpon>Mesas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Mesas.aspx.designer.cs">
+    <Compile Include="backoffice\Mesas.aspx.designer.cs">
       <DependentUpon>Mesas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Empleados.aspx.cs">
+    <Compile Include="backoffice\Empleados.aspx.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Empleados.aspx.designer.cs">
+    <Compile Include="backoffice\Empleados.aspx.designer.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FormularioEmpleado.aspx.cs">
+    <Compile Include="backoffice\FormularioEmpleado.aspx.cs">
       <DependentUpon>FormularioEmpleado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormularioEmpleado.aspx.designer.cs">
+    <Compile Include="backoffice\FormularioEmpleado.aspx.designer.cs">
       <DependentUpon>FormularioEmpleado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -247,12 +247,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AsignarMesas.aspx.cs">
-      <DependentUpon>AsignarMesas.aspx</DependentUpon>
+    <Compile Include="MesasAsignadas.aspx.cs">
+      <DependentUpon>MesasAsignadas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AsignarMesas.aspx.designer.cs">
-      <DependentUpon>AsignarMesas.aspx</DependentUpon>
+    <Compile Include="MesasAsignadas.aspx.designer.cs">
+      <DependentUpon>MesasAsignadas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pedidos.aspx.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>

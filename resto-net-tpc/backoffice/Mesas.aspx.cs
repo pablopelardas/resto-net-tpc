@@ -23,7 +23,7 @@ namespace resto_net_tpc
         protected void dgvMesas_SelectedIndexChanged(object sender, EventArgs e)
         {
             string Id = dgvMesas.SelectedDataKey.Value.ToString();
-            Response.Redirect("FormularioMesa.aspx?id=" + Id, false);
+            Response.Redirect("./FormularioMesa.aspx?id=" + Id, false);
         }
     }
 }

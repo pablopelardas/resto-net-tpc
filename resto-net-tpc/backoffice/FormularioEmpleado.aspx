@@ -52,6 +52,10 @@
                 <asp:Label ID="lblPass" CssClass="form-label" runat="server" Text="Contraseña"></asp:Label>
                 <asp:TextBox ID="tBoxPass" CssClass="form-control" TextMode="Password" runat="server"></asp:TextBox>
             </div>
+            <div class="mt-4 mb-3">
+                <asp:Label ID="lblError" CssClass="error-label" runat="server" Text=""></asp:Label>
+            </div>
+
             <div class="mb-3">
                 <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary" runat="server" Text="Aceptar" />
                 <a href="Empleados.aspx" class="btn btn-secondary">Cancelar</a>

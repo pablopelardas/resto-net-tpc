@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace resto_net_tpc
 {
-    public partial class AsignarMesas : System.Web.UI.Page
+    public partial class MesasAsignadas : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

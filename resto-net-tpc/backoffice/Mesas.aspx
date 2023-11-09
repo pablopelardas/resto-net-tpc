@@ -24,7 +24,7 @@
                 <asp:CommandField ShowSelectButton="true" SelectText="Editar" HeaderText="Modificar" />
             </Columns>
         </asp:GridView>
-        <a href="FormularioMesa.aspx">Agregar</a>
+        <a href="./FormularioMesa.aspx">Agregar</a>
     </div>
 
 </asp:Content>

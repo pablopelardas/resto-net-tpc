@@ -4,10 +4,10 @@
 
     <div class="row">
         <div class="col-3">
-            <a href="/Empleados.aspx">Administrar empleados</a>
+            <a href="/backoffice/Empleados.aspx">Administrar empleados</a>
         </div>        
         <div class="col-3">
-            <a href="/Mesas.aspx">Administrar Mesas</a>
+            <a href="/backoffice/Mesas.aspx">Administrar Mesas</a>
         </div>
         <div>
             <a href="/Insumos.aspx">Administrar insumos</a>
