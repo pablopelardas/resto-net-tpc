@@ -6,6 +6,9 @@
         <div class="col-3">
             <a href="/Empleados.aspx">Administrar empleados</a>
         </div>
+        <div>
+            <a href="/Insumos.aspx">Administrar insumos</a>
+        </div>
 
     </div>
 
