@@ -16,5 +16,11 @@ namespace resto_net_tpc
             dgvInsumos.DataSource = negocio.Listar();
             dgvInsumos.DataBind();
         }
+
+        protected void dgvInsumos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = dgvInsumos.SelectedDataKey.Value.ToString();
+            Response.Redirect("./FormularioInsumo.aspx?id=" + id, false);
+        }
     }
 }

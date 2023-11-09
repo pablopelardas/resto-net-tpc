@@ -76,5 +76,44 @@ namespace Negocio
 			}
 		}
 
+		public Insumo BuscarInsumo(int id)
+		{
+			AccesoDatos datos = new AccesoDatos();
+
+			try
+			{
+				datos.SetProcedure("spObtenerInsumoPorID");
+				datos.SetParameter("@id", id);
+				datos.ReadData();
+
+                Insumo aux = new Insumo();
+                datos.Reader.Read();
+
+                aux.Id = (int)datos.Reader["id"];
+                aux.Nombre = (string)datos.Reader["nombre"];
+                aux.Categoria = new Categoria();
+                aux.Categoria.Id = (int)datos.Reader["categoria_id"];
+                aux.Categoria.Nombre = (string)datos.Reader["categoria_nombre"];
+                aux.Stock = (int)datos.Reader["stock"];
+                aux.StockMinimo = (int)datos.Reader["stock_minimo"];
+                aux.Precio = (decimal)datos.Reader["precio"];
+                aux.Estado = (bool)datos.Reader["estado"];
+
+				return aux;
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.CloseConnection();
+			}
+		}
+
+		public void Modificar()
+		{
+
+		}
     }
 }

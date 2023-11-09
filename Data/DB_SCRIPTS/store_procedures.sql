@@ -238,6 +238,18 @@ BEGIN
 END
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spObtenerInsumoPorID]
+ @id INT
+AS
+BEGIN
+    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, i.precio as precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.id = @id
+END
+GO
+
 -- ============================================= CATEGORIAS =============================================
 SET ANSI_NULLS ON
 GO

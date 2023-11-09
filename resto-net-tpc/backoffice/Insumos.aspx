@@ -9,7 +9,9 @@
     </div>
 
     <div class="row">
-        <asp:GridView ID="dgvInsumos" CssClass="table table-dark" AutoGenerateColumns="false" runat="server">
+        <asp:GridView ID="dgvInsumos" DataKeyNames="Id" 
+            OnSelectedIndexChanged="dgvInsumos_SelectedIndexChanged" 
+            CssClass="table table-dark" AutoGenerateColumns="false" runat="server">
             <Columns>
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                 <asp:BoundField HeaderText="Categoria" DataField="Categoria.Nombre" />

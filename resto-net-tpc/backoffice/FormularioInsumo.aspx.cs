@@ -13,6 +13,7 @@ namespace resto_net_tpc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Configuracion inicial de la pantalla.
             if (!IsPostBack)
             {
                 CategoriaNegocio negocio = new CategoriaNegocio();
@@ -20,6 +21,22 @@ namespace resto_net_tpc
                 ddlCategoria.DataTextField = "Nombre";
                 ddlCategoria.DataValueField = "Id";
                 ddlCategoria.DataBind();
+            }
+
+            // Si esta modificando.
+            if (Request.QueryString["id"] != null)
+            {
+                Insumo insumo = new Insumo();
+                InsumoNegocio negocio = new InsumoNegocio();
+
+                insumo = negocio.BuscarInsumo(int.Parse(Request.QueryString["id"]));
+
+                tBoxNombre.Text = insumo.Nombre;
+                ddlCategoria.DataValueField = insumo.Categoria.Id.ToString();
+                tBoxStock.Text = insumo.Stock.ToString();
+                tBoxStockMinimo.Text = insumo.StockMinimo.ToString();
+                tBoxPrecio.Text = insumo.Precio.ToString();
+
             }
         }
 
