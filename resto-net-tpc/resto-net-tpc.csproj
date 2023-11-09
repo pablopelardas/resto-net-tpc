@@ -119,13 +119,14 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Mesas.aspx" />
     <Content Include="Empleados.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="FormularioEmpleado.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Insumos.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="Mesas.aspx" />
+    <Content Include="AsignarMesas.aspx" />
     <Content Include="Pedidos.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -200,6 +201,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Mesas.aspx.cs">
+      <DependentUpon>Mesas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mesas.aspx.designer.cs">
+      <DependentUpon>Mesas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Empleados.aspx.cs">
       <DependentUpon>Empleados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -231,12 +239,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Mesas.aspx.cs">
-      <DependentUpon>Mesas.aspx</DependentUpon>
+    <Compile Include="AsignarMesas.aspx.cs">
+      <DependentUpon>AsignarMesas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Mesas.aspx.designer.cs">
-      <DependentUpon>Mesas.aspx</DependentUpon>
+    <Compile Include="AsignarMesas.aspx.designer.cs">
+      <DependentUpon>AsignarMesas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pedidos.aspx.cs">
       <DependentUpon>Pedidos.aspx</DependentUpon>

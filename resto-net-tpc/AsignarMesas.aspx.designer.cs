@@ -11,16 +11,7 @@ namespace resto_net_tpc
 {
 
 
-    public partial class Mesas
+    public partial class AsignarMesas
     {
-
-        /// <summary>
-        /// dgvMesas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvMesas;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,16 @@ namespace resto_net_tpc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            MesasNegocio mesasNegocio = new MesasNegocio();
+         
+            dgvMesas.DataSource = mesasNegocio.Listar();
+            dgvMesas.DataBind();
+        }
 
+        protected void dgvMesas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string Id = dgvMesas.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioEmpleado.aspx?id=" + Id, false);
         }
     }
 }

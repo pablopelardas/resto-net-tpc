@@ -3,100 +3,23 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="row">
-
-        <div class="d-flex flex-column align-items-center mt-2">
-            <h2>Mesas asignadas</h2>
-
-            <div class="d-flex mt-4" role="search">
-                <input class="form-control me-2" type="search" placeholder="Numero de mesa" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </div>
+        <div class="d-flex justify-content-center">
+            <h2>Mesas</h2>
         </div>
-
-
-
     </div>
 
-    <div class="row row-cols-md-4 g-4 mt-0">
-
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Nro mesa</h5>
-                    <p class="card-text">Capacidad</p>
-                    <p class="card-text">Estado</p>
-                    <a href="Pedidos.aspx" class="btn">Abir</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Nro mesa</h5>
-                    <p class="card-text">Capacidad</p>
-                    <p class="card-text">Estado</p>
-                    <a href="Pedidos.aspx" class="btn">Abir</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Nro mesa</h5>
-                    <p class="card-text">Capacidad</p>
-                    <p class="card-text">Estado</p>
-                    <a href="Pedidos.aspx" class="btn">Abir</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Nro mesa</h5>
-                    <p class="card-text">Capacidad</p>
-                    <p class="card-text">Estado</p>
-                    <a href="Pedidos.aspx" class="btn">Abir</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Nro mesa</h5>
-                    <p class="card-text">Capacidad</p>
-                    <p class="card-text">Estado</p>
-                    <a href="Pedidos.aspx" class="btn">Abir</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Nro mesa</h5>
-                    <p class="card-text">Capacidad</p>
-                    <p class="card-text">Estado</p>
-                    <a href="Pedidos.aspx" class="btn">Abir</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Nro mesa</h5>
-                    <p class="card-text">Capacidad</p>
-                    <p class="card-text">Estado</p>
-                    <a href="Pedidos.aspx" class="btn">Abir</a>
-                </div>
-            </div>
-
-        </div>
-
+    <div class="row">
+        <asp:GridView ID="dgvMesas" DataKeyNames="Id"
+            CssClass="table table-dark" OnSelectedIndexChanged="dgvMesas_SelectedIndexChanged"
+            AutoGenerateColumns="false" runat="server">
+            <Columns>
+                <asp:BoundField HeaderText="Número" DataField="Numero" />
+                <asp:BoundField HeaderText="Capacidad" DataField="Capacidad" />
+                <asp:BoundField HeaderText="Estado" DataField="Estado" />
+                <asp:CommandField ShowSelectButton="true" SelectText="Editar" HeaderText="Modificar" />
+            </Columns>
+        </asp:GridView>
+        <a href="FormularioEmpleado.aspx">Agregar</a>
     </div>
 
 </asp:Content>
