@@ -101,7 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Administracion.aspx" />
+    <Content Include="backoffice\Administracion.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -193,11 +193,11 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracion.aspx.cs">
+    <Compile Include="backoffice\Administracion.aspx.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion.aspx.designer.cs">
+    <Compile Include="backoffice\Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
