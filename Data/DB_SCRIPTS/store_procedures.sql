@@ -209,7 +209,7 @@ BEGIN
         stock = @stock,
         stock_minimo = @stock_minimo,
         precio = @precio
-    WHERE id = @id;
+    WHERE id = @id
 END
 GO
 

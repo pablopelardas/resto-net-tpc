@@ -111,9 +111,30 @@ namespace Negocio
 			}
 		}
 
-		public void Modificar()
+		public void Modificar(Insumo insumo)
 		{
+			AccesoDatos datos = new AccesoDatos();
 
+			try
+			{
+                datos.SetProcedure("spActualizarInsumo");
+				datos.SetParameter("@id", insumo.Id);
+                datos.SetParameter("@categoria_id", insumo.Categoria.Id);
+                datos.SetParameter("@nombre", insumo.Nombre);
+                datos.SetParameter("@stock", insumo.Stock);
+                datos.SetParameter("@stock_minimo", insumo.StockMinimo);
+                datos.SetParameter("@precio", insumo.Precio);
+
+                datos.ExecuteNonQuery();
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.CloseConnection();
+			}
 		}
     }
 }

@@ -24,7 +24,7 @@ namespace resto_net_tpc
             }
 
             // Si esta modificando.
-            if (Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] != null && !IsPostBack)
             {
                 Insumo insumo = new Insumo();
                 InsumoNegocio negocio = new InsumoNegocio();
@@ -32,11 +32,10 @@ namespace resto_net_tpc
                 insumo = negocio.BuscarInsumo(int.Parse(Request.QueryString["id"]));
 
                 tBoxNombre.Text = insumo.Nombre;
-                ddlCategoria.DataValueField = insumo.Categoria.Id.ToString();
+                ddlCategoria.SelectedValue = insumo.Categoria.Id.ToString();
                 tBoxStock.Text = insumo.Stock.ToString();
                 tBoxStockMinimo.Text = insumo.StockMinimo.ToString();
                 tBoxPrecio.Text = insumo.Precio.ToString();
-
             }
         }
 
@@ -54,7 +53,16 @@ namespace resto_net_tpc
                 insumo.StockMinimo = int.Parse(tBoxStockMinimo.Text);
                 insumo.Precio = decimal.Parse(tBoxPrecio.Text);
 
-                negocio.Agregar(insumo);
+                if (Request.QueryString["id"] != null)
+                {
+                    insumo.Id = int.Parse(Request.QueryString["id"]);
+                    negocio.Modificar(insumo);
+                }
+                else
+                {
+                    negocio.Agregar(insumo);
+                }
+
                 Response.Redirect("Insumos.aspx", false);
             }
             catch (Exception ex)
