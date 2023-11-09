@@ -27,10 +27,8 @@ namespace Negocio
 					aux.Id = (int)datos.Reader["id"];
 					aux.Nombre = (string)datos.Reader["nombre"];
 					aux.Categoria = new Categoria();
-
 					aux.Categoria.Id = (int)datos.Reader["categoria_id"];
-					//aux.Categoria.Nombre = (string)datos.Reader["nombre"];
-
+					aux.Categoria.Nombre = (string)datos.Reader["categoria_nombre"];
 					aux.Stock = (int)datos.Reader["stock"];
 					aux.StockMinimo = (int)datos.Reader["stock_minimo"];
 					aux.Precio = (decimal)datos.Reader["precio"];

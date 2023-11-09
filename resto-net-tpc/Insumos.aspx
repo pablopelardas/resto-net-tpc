@@ -9,7 +9,15 @@
     </div>
 
     <div class="row">
-        <asp:GridView ID="dgvInsumos" runat="server"></asp:GridView>
+        <asp:GridView ID="dgvInsumos" CssClass="table table-dark" AutoGenerateColumns="false" runat="server">
+            <Columns>
+                <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                <asp:BoundField HeaderText="Categoria" DataField="Categoria.Nombre" />
+                <asp:BoundField HeaderText="Stock" DataField="Stock" />
+                <asp:BoundField HeaderText="Stock minimo" DataField="StockMinimo" />
+                <asp:BoundField HeaderText="Precio" DataField="Precio" />
+            </Columns>
+        </asp:GridView>
     </div>
 
 </asp:Content>

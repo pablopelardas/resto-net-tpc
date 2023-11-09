@@ -234,8 +234,7 @@ GO
 CREATE PROCEDURE [dbo].[spObtenerTodosLosInsumos]
 AS
 BEGIN
-    SELECT *
-    FROM insumos;
+    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id
 END
 GO
 
