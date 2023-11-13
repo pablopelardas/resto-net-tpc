@@ -434,7 +434,7 @@ AS
 BEGIN
     SELECT *
     FROM mesas
-    WHERE deleted_at IS NULL;
+    WHERE deleted_at IS NULL
 END
 GO
 
@@ -513,13 +513,15 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spObtenerTodasLasMesasAsignadas]
+CREATE PROCEDURE [dbo].[spObtenerTodasLasMesasAsignadasPorId]
+	@id INT
 AS
 BEGIN
-    SELECT *
-    FROM mesas_asignadas;
+	select M.id, M.numero, M.capacidad, M.estado from mesas_asignadas MA 
+	Inner Join mesas M ON MA.mesa_id = M.id
+	Where MA.empleado_id = @id 
 END
-
+Go
 
 SET ANSI_NULLS ON
 GO

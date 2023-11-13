@@ -10,17 +10,16 @@ namespace Dominio
     {
         public int Id { get; set; }
         public int Numero { get; set; }
-
         public int Capacidad { get; set; }
-
+        public string Ocupacion { get; set; }
         public bool Estado { get; set; }
 
-    public Mesa()
+        public Mesa()
         {
-            
+
         }
 
-    public Mesa(int id, int numero, int capacidad, bool estado)
+        public Mesa(int id, int numero, int capacidad, bool estado)
         {
             Id = id;
             Numero = numero;
