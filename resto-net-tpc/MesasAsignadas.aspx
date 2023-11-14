@@ -19,7 +19,7 @@
                             <h5 class="card-title"><%: mesa.Numero %></h5>
                             <p class="card-text"><%: mesa.Capacidad %></p>
                             <p class="card-text"><%: mesa.Ocupacion %></p>
-                            <a href="Pedidos.aspx" class="btn">Abir</a>
+                            <a href="Pedidos.aspx?id=<%: mesa.Id %>" class="btn">Abir</a>
                         </div>
                     </div>
                 </div>
