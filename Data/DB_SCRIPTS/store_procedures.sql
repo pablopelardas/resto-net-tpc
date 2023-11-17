@@ -249,6 +249,26 @@ BEGIN
 END
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spObtenerTodosLosInsumosAsignadosAlMenuInsumosPorCategoriaID]
+	@id int
+AS
+BEGIN
+    select 
+		i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, i.precio, estado 
+	from menu_insumos mi
+	Inner Join insumos i ON mi.insumo_id = i.id
+	Inner Join categorias c ON i.categoria_id = c.id
+	Where mi.insumo_id IN (
+		select I.id from categorias c
+		Inner Join insumos i ON c.id = i.categoria_id
+		Where c.id = @id ) and i.estado = 1
+END
+GO
+
 -- ============================================= CATEGORIAS =============================================
 SET ANSI_NULLS ON
 GO

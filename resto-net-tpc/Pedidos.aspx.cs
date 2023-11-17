@@ -24,7 +24,20 @@ namespace resto_net_tpc
 
         protected void btnCategoria_Click(object sender, EventArgs e)
         {
-            string id = ((Button)sender).CommandArgument;
+            InsumoNegocio negocio = new InsumoNegocio();
+            try
+            {
+                int id = int.Parse(((Button)sender).CommandArgument);
+                repInsumosPorCategoria.DataSource = negocio.ListarInsumosPorCategoria(id);
+                repInsumosPorCategoria.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                // Redireccionar a pagina de error..
+            }
         }
     }
 }

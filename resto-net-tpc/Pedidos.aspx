@@ -13,6 +13,13 @@
                 </ItemTemplate>
             </asp:Repeater>
 
+            <asp:Repeater ID="repInsumosPorCategoria" runat="server">
+                <ItemTemplate>
+                    <asp:Button ID="btnInsumo" runat="server" Text='<% #Eval("Nombre") %>' 
+                        
+                        />
+                </ItemTemplate>
+            </asp:Repeater>
             
 
         </div>
