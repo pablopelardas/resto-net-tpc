@@ -1,11 +1,8 @@
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'RESTO-NET-TPC')
 BEGIN
-  CREATE DATABASE "RESTO-NET-TPC";
-END;
-
+  CREATE DATABASE "RESTO-NET-TPC"
+END
 GO
-
-USE "RESTO-NET-TPC";
 
 CREATE TABLE empleados
 (
@@ -37,7 +34,8 @@ CREATE TABLE empleados
     CHECK (fecha_egreso IS NULL OR estado = 0),
     CHECK (fecha_egreso IS NOT NULL OR estado = 1),
     CHECK (perfil IN ('mesero', 'gerente')),
-);
+)
+GO
 
 CREATE TABLE usuarios
 (
@@ -49,53 +47,38 @@ CREATE TABLE usuarios
     PRIMARY KEY (id),
     FOREIGN KEY (empleado_id) REFERENCES empleados(id),
     UNIQUE (empleado_id),
-);
+)
+GO
 
 CREATE TABLE mesas
 (
     id int IDENTITY(1,1) NOT NULL,
     numero int NOT NULL,
-    estado BIT NOT NULL DEFAULT 1,
     capacidad int NOT NULL,
+    estado BIT NOT NULL DEFAULT 1,
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
     UNIQUE (numero),
-);
+)
+GO
 
-CREATE table mesas_asignadas
+CREATE TABLE mesas_asignadas
 (
     id int IDENTITY(1,1) NOT NULL,
     mesa_id int NOT NULL,
     empleado_id int NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'libre',
     fecha DATE NOT NULL,
-    turno VARCHAR(20) NOT NULL,
+    estado VARCHAR(20) NOT NULL DEFAULT 'libre',
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
     FOREIGN KEY (mesa_id) REFERENCES mesas(id),
     FOREIGN KEY (empleado_id) REFERENCES empleados(id),
     UNIQUE (mesa_id, fecha),
-    CHECK (turno IN ('almuerzo', 'cena')),
     CHECK (estado IN ('libre', 'ocupada', 'reservada')),
-);
-
-CREATE TABLE pedidos
-(
-    id int IDENTITY(1,1) NOT NULL,
-    mesa_asignada_id int NOT NULL,
-    apertura DATE NOT NULL,
-    cierre DATE NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'abierto',
-    deleted_at DATETIME NULL DEFAULT NULL,
-    updated_at DATETIME NULL DEFAULT GETDATE(),
-    PRIMARY KEY (id),
-    FOREIGN KEY (mesa_asignada_id) REFERENCES mesas_asignadas(id),
-    UNIQUE (mesa_asignada_id, apertura),
-    CHECK (cierre IS NULL OR estado = 'cerrado'),
-    CHECK (estado IN ('abierto', 'cerrado')),
-);
+)
+GO
 
 CREATE TABLE categorias
 (
@@ -105,7 +88,8 @@ CREATE TABLE categorias
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
     UNIQUE (nombre),
-);
+)
+GO
 
 CREATE TABLE insumos
 (
@@ -125,51 +109,42 @@ CREATE TABLE insumos
     CHECK (stock_minimo >= 0),
     CHECK (stock >= stock_minimo),
     CHECK (precio > 0)
-);
+)
+GO
 
-CREATE TABLE menus
+
+CREATE TABLE pedidos
 (
     id int IDENTITY(1,1) NOT NULL,
-    fecha DATE NOT NULL,
-    turno VARCHAR(20) NOT NULL,
+    mesa_asignada_id int NOT NULL,
+    apertura DATETIME NOT NULL,
+    cierre DATETIME NULL,
+    estado BIT NOT NULL DEFAULT 1,
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
-    UNIQUE (fecha, turno),
-    CHECK (turno IN ('almuerzo', 'cena')),
-);
-
-CREATE TABLE menu_insumos
-(
-    id int IDENTITY(1,1) NOT NULL,
-    menu_id int NOT NULL,
-    insumo_id int NOT NULL,
-    cantidad int NOT NULL,
-    precio DECIMAL(10,2) NOT NULL,
-    deleted_at DATETIME NULL DEFAULT NULL,
-    updated_at DATETIME NULL DEFAULT GETDATE(),
-    PRIMARY KEY (id),
-    FOREIGN KEY (menu_id) REFERENCES menus(id),
-    FOREIGN KEY (insumo_id) REFERENCES insumos(id),
-    UNIQUE (menu_id, insumo_id),
-    CHECK (cantidad > 0),
-    CHECK (precio > 0),
-);
+    FOREIGN KEY (mesa_asignada_id) REFERENCES mesas_asignadas(id),
+    UNIQUE (mesa_asignada_id, apertura),
+)
+GO
 
 CREATE TABLE pedidos_detalle
 (
     id int IDENTITY(1,1) NOT NULL,
-    menu_insumo_id int NOT NULL,
+    insumo_id int NOT NULL,
     pedido_id int NOT NULL,
     cantidad int NOT NULL,
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
-    FOREIGN KEY (menu_insumo_id) REFERENCES menu_insumos(id),
+    FOREIGN KEY (insumo_id) REFERENCES insumos(id),
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
-    UNIQUE (menu_insumo_id, pedido_id),
+    UNIQUE (insumo_id, pedido_id),
     CHECK (cantidad > 0),
-);
+)
+GO
+
+
 
 CREATE TABLE facturas
 (
@@ -183,7 +158,8 @@ CREATE TABLE facturas
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
     UNIQUE (pedido_id),
     CHECK (total > 0),
-);
+)
+GO
 
 CREATE TABLE factura_pagos
 (
@@ -198,5 +174,8 @@ CREATE TABLE factura_pagos
     UNIQUE (factura_id, metodo),
     CHECK (metodo IN ('efectivo', 'tarjeta')),
     CHECK (monto > 0),
-);
+)
+GO
 
+USE "RESTO-NET-TPC"
+GO
