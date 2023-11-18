@@ -11,7 +11,6 @@ namespace Negocio
 {
     public class EmpleadoNegocio
     {
-        // Falta validar los null del metodo listar.
         public List<Empleado> Listar()
         {
             List<Empleado> lista = new List<Empleado>();
@@ -34,11 +33,11 @@ namespace Negocio
                     aux.FechaNacimiento = (DateTime)datos.Reader["fecha_nacimiento"];
                     aux.FechaIngreso = (DateTime)datos.Reader["fecha_ingreso"];
                     aux.FechaEgreso = !(datos.Reader["fecha_egreso"] is DBNull) ? (DateTime)datos.Reader["fecha_egreso"] : DateTime.Parse("1/1/1000");
-                    aux.Telefono = (string)datos.Reader["telefono"];
-                    aux.Email = (string)datos.Reader["email"];
-                    aux.Direccion = (string)datos.Reader["direccion"];
-                    aux.Localidad = (string)datos.Reader["localidad"];
-                    aux.Provincia = (string)datos.Reader["provincia"];
+                    aux.Telefono =  !(datos.Reader["telefono"] is DBNull) ? (string)datos.Reader["telefono"] : "xxxxxxxxxx";
+                    aux.Email = !(datos.Reader["email"] is DBNull) ? (string)datos.Reader["email"] : "xxxxxxxxxx";
+                    aux.Direccion = !(datos.Reader["direccion"] is DBNull) ? (string)datos.Reader["direccion"] : "xxxxxxxxxx";
+                    aux.Localidad = !(datos.Reader["localidad"] is DBNull) ? (string)datos.Reader["localidad"] : "xxxxxxxxxx";
+                    aux.Provincia = !(datos.Reader["provincia"] is DBNull) ? (string)datos.Reader["provincia"] : "xxxxxxxxxx";
                     aux.Perfil = (string)datos.Reader["perfil"];
 
                     lista.Add(aux);

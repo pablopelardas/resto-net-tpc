@@ -123,58 +123,31 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.Label lblErrorDNI;
 
         /// <summary>
-        /// Control lblFechaNacimiento.
+        /// Control lblPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaNacimiento;
+        protected global::System.Web.UI.WebControls.Label lblPass;
 
         /// <summary>
-        /// Control tBoxFechaNacimiento.
+        /// Control tBoxPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tBoxFechaNacimiento;
+        protected global::System.Web.UI.WebControls.TextBox tBoxPass;
 
         /// <summary>
-        /// Control lblErrorFechaNacimiento.
+        /// Control lblErrorPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorFechaNacimiento;
-
-        /// <summary>
-        /// Control lblFechaIngreso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaIngreso;
-
-        /// <summary>
-        /// Control tBoxFechaIngreso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tBoxFechaIngreso;
-
-        /// <summary>
-        /// Control lblErrorFechaIngreso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorFechaIngreso;
+        protected global::System.Web.UI.WebControls.Label lblErrorPass;
 
         /// <summary>
         /// Control lblTelefono.
@@ -229,6 +202,15 @@ namespace resto_net_tpc
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorEmail;
+
+        /// <summary>
+        /// Control lblErrorGeneral.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorGeneral;
 
         /// <summary>
         /// Control lblDireccion.
@@ -312,40 +294,58 @@ namespace resto_net_tpc
         protected global::System.Web.UI.WebControls.Label lblErrorProvincia;
 
         /// <summary>
-        /// Control lblPass.
+        /// Control lblFechaNacimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPass;
+        protected global::System.Web.UI.WebControls.Label lblFechaNacimiento;
 
         /// <summary>
-        /// Control tBoxPass.
+        /// Control tBoxFechaNacimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tBoxPass;
+        protected global::System.Web.UI.WebControls.TextBox tBoxFechaNacimiento;
 
         /// <summary>
-        /// Control lblErrorPass.
+        /// Control lblErrorFechaNacimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorPass;
+        protected global::System.Web.UI.WebControls.Label lblErrorFechaNacimiento;
 
         /// <summary>
-        /// Control lblErrorGeneral.
+        /// Control lblFechaIngreso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorGeneral;
+        protected global::System.Web.UI.WebControls.Label lblFechaIngreso;
+
+        /// <summary>
+        /// Control tBoxFechaIngreso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tBoxFechaIngreso;
+
+        /// <summary>
+        /// Control lblErrorFechaIngreso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorFechaIngreso;
 
         /// <summary>
         /// Control btnAceptar.

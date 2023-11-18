@@ -4,6 +4,9 @@ BEGIN
 END
 GO
 
+USE "RESTO-NET-TPC"
+GO
+
 CREATE TABLE empleados
 (
     id int IDENTITY(1,1) NOT NULL,
@@ -177,5 +180,3 @@ CREATE TABLE factura_pagos
 )
 GO
 
-USE "RESTO-NET-TPC"
-GO

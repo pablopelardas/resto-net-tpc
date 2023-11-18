@@ -1,12 +1,24 @@
--- Date: 2023/10/31 12:00:00
+USE "RESTO-NET-TPC"
+GO
 
 -- ============================================= EMPLEADOS =============================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerTodosLosEmpleados
+AS
+BEGIN
+    SELECT * FROM empleados
+    WHERE deleted_at IS NULL
+END
+GO
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spAgregarEmpleadoYUsuario]
+CREATE PROCEDURE spAgregarEmpleadoYUsuario
     @apellido VARCHAR(50),
     @nombre VARCHAR(50),
     @dni VARCHAR(10),
@@ -53,6 +65,9 @@ BEGIN
     VALUES (@empleado_id, @contrasenia);
 END
 GO
+
+
+
 
 
 SET ANSI_NULLS ON
@@ -134,17 +149,7 @@ BEGIN
 END
 GO
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerTodosLosEmpleados]
-AS
-BEGIN
-    SELECT * FROM empleados
-    WHERE deleted_at IS NULL;
-END
-GO
+
 
 SET ANSI_NULLS ON
 GO
