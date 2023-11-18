@@ -21,7 +21,6 @@ namespace resto_net_tpc
             if (!IsPostBack)
             {
                 Session.Remove("currentMesa");
-                chkEstado.Checked = true;
             }
             if (isEditMode)
             {
@@ -48,7 +47,6 @@ namespace resto_net_tpc
                         {
                             txtNumero.Text = mesa.Numero.ToString();
                             txtCapacidad.Text = mesa.Capacidad.ToString();
-                            chkEstado.Checked = mesa.Estado;
                             Session.Add("currentMesa", mesa);
                         }
                     }
@@ -84,7 +82,6 @@ namespace resto_net_tpc
                     return;
                 }
                 mesa.Numero = num;
-                mesa.Estado = chkEstado.Checked;
                 if (id >= 0)
                 {
 

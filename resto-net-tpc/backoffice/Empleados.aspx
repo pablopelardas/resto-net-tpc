@@ -48,13 +48,11 @@
                 <asp:BoundField HeaderText="Fecha Egreso" DataField="FechaEgreso" />
                 <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
                 <asp:CommandField ShowSelectButton="true" SelectText="📝" />
-                <asp:ButtonField ButtonType="Button" Text="❌" />
             </Columns>
         </asp:GridView>
 
         <div>
             <a class="btn btn-primary" href="./FormularioEmpleado.aspx">Agregar</a>
-
         </div>
     </div>
 

@@ -2,15 +2,42 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row">
+    <div class="header bg-dark">
+        <div class="container">
+            <div class="btn-menu">
+                <label for="btn-menu">☰</label>
+            </div>
+
+            <nav class="menu">
+                <a href="#">Inicio</a>
+                <a href="#">Nosotros</a>
+                <a href="#">Blog</a>
+                <a href="#">Contacto</a>
+            </nav>
+        </div>
+    </div>
+    <div class="capa"></div>
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <a href="../backoffice/Empleados.aspx">Empleados</a>
+                <a href="../backoffice/Insumos.aspx">Insumos</a>
+                <a href="../backoffice/Mesas.aspx">Mesas</a>
+            </nav>
+            <label for="btn-menu">✖️</label>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 110px;">
         <div class="d-flex justify-content-center">
             <h2>Insumos</h2>
         </div>
     </div>
 
     <div class="row">
-        <asp:GridView ID="dgvInsumos" DataKeyNames="Id" 
-            OnSelectedIndexChanged="dgvInsumos_SelectedIndexChanged" 
+        <asp:GridView ID="dgvInsumos" DataKeyNames="Id"
+            OnSelectedIndexChanged="dgvInsumos_SelectedIndexChanged"
             CssClass="table table-dark" AutoGenerateColumns="false" runat="server">
             <Columns>
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -18,10 +45,13 @@
                 <asp:BoundField HeaderText="Stock" DataField="Stock" />
                 <asp:BoundField HeaderText="Stock minimo" DataField="StockMinimo" />
                 <asp:BoundField HeaderText="Precio" DataField="Precio" />
-                <asp:CommandField ShowSelectButton="true" SelectText="Editar" HeaderText="Modificar" />
+                <asp:CommandField ShowSelectButton="true" SelectText="📝" />
             </Columns>
         </asp:GridView>
-        <a href="./FormularioInsumo.aspx">Agregar</a>
+
+        <div>
+            <a class="btn btn-primary" href="./FormularioInsumo.aspx">Agregar</a>
+        </div>
     </div>
 
 </asp:Content>

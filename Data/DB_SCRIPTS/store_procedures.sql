@@ -66,9 +66,19 @@ BEGIN
 END
 GO
 
-
-
-
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[spObtenerEmpleadoPorID]
+    @id INT
+AS
+BEGIN
+    SELECT *
+    FROM empleados
+    WHERE id = @id;
+END
+GO
 
 SET ANSI_NULLS ON
 GO
@@ -120,7 +130,6 @@ BEGIN
 END
 GO
 
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,19 +144,7 @@ BEGIN
 END
 GO
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerEmpleadoPorID]
-    @id INT
-AS
-BEGIN
-    SELECT *
-    FROM empleados
-    WHERE id = @id;
-END
-GO
+
 
 
 
@@ -174,13 +171,26 @@ BEGIN
 	SET estado = 1, fecha_egreso = NULL, deleted_at = NULL
 	WHERE id = @id;
 END
+GO
+
 
 -- ============================================= INSUMOS =============================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spAgregarInsumo]
+CREATE PROCEDURE spObtenerTodosLosInsumos
+AS
+BEGIN
+    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.estado = 1
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spAgregarInsumo
     @categoria_id INT,
     @nombre VARCHAR(50),
     @stock INT,
@@ -197,7 +207,19 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spActualizarInsumo]
+CREATE PROCEDURE spObtenerInsumoPorID
+ @id INT
+AS
+BEGIN
+    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, i.precio as precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.id = @id
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spActualizarInsumo
     @id INT,
     @categoria_id INT,
     @nombre VARCHAR(50),
@@ -221,7 +243,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spEliminarInsumo]
+CREATE PROCEDURE spEliminarInsumo
     @id INT
 AS
 BEGIN
@@ -231,28 +253,19 @@ BEGIN
 END
 GO
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerTodosLosInsumos]
-AS
-BEGIN
-    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.estado = 1
-END
-GO
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerInsumoPorID]
- @id INT
-AS
-BEGIN
-    select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, i.precio as precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.id = @id
-END
-GO
+
+
+
+
+
+
+
+
+
+
+
+
 
 SET ANSI_NULLS ON
 GO
@@ -275,6 +288,23 @@ END
 GO
 
 -- ============================================= CATEGORIAS =============================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerTodasLasCategorias
+AS
+BEGIN
+	select id, nombre from categorias
+END
+GO
+
+
+
+
+
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -317,27 +347,28 @@ BEGIN
 END
 GO
 
+
+-- ============================================= MESAS =============================================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spObtenerTodasLasCategorias]
+CREATE PROCEDURE spObtenerTodasLasMesas
 AS
 BEGIN
-	select id, nombre from categorias
+    SELECT *
+    FROM mesas
+    WHERE deleted_at IS NULL
 END
 GO
 
--- ============================================= MESAS =============================================
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spAgregarMesa]
+CREATE PROCEDURE spAgregarMesa
     @numero INT,
-    @capacidad INT,
-    @estado BIT = 1
+    @capacidad INT
 AS
 BEGIN
     DECLARE @mesa_id INT;
@@ -364,104 +395,51 @@ BEGIN
     ELSE
     BEGIN
         -- Si no existe una mesa eliminada con ese número, crear una nueva mesa
-        INSERT INTO mesas (numero, capacidad, estado)
-        VALUES (@numero, @capacidad, @estado);
+        INSERT INTO mesas (numero, capacidad) VALUES (@numero, @capacidad)
     END
 END
 GO
-
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spActualizarMesa]
+CREATE PROCEDURE spObtenerMesaPorID
+    @id INT
+AS
+BEGIN
+    SELECT *
+    FROM mesas
+    WHERE id = @id
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spActualizarMesa
     @id INT,
     @numero INT,
-    @capacidad INT,
-    @estado BIT = 1
+    @capacidad INT
 AS
 BEGIN
-    DECLARE @mesa_id INT;
-    DECLARE @deleted_at DATETIME;
-
-    SELECT @mesa_id = id, @deleted_at = deleted_at
-    FROM mesas
-	WHERE numero = @numero
-
-    IF @mesa_id IS NOT NULL
-    BEGIN
-        IF @deleted_at IS NULL
-        BEGIN
-            RAISERROR('001:Ya existe una mesa con ese número', 16, 1);
-        END
-        ELSE
-        BEGIN
-            UPDATE mesas
-            SET numero = null
-            WHERE id = @mesa_id;
-
-            UPDATE mesas
-            SET numero = @numero,
-				capacidad = @capacidad,
-				estado = @estado
-			WHERE id = @id;
-		END
-    END
-    ELSE
-    BEGIN
-    UPDATE mesas
-    SET
-        numero = @numero,
-        capacidad = @capacidad,
-        estado = @estado
-    WHERE id = @id;
-    END
+	UPDATE mesas SET numero = @numero, capacidad = @capacidad  WHERE id = @id
 END
 GO
-
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spEliminarMesa]
+CREATE PROCEDURE spEliminarMesa
     @id INT
 AS
 BEGIN
-    UPDATE mesas
-    SET estado = 0, deleted_at = GETDATE()
-    WHERE id = @id;
+    UPDATE mesas SET estado = 0, deleted_at = GETDATE() WHERE id = @id
 END
 GO
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerMesaPorID]
-    @id INT
-AS
-BEGIN
-    SELECT *
-    FROM mesas
-    WHERE id = @id;
-END
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerTodasLasMesas]
-AS
-BEGIN
-    SELECT *
-    FROM mesas
-    WHERE deleted_at IS NULL
-END
-GO
 
 -- ============================================= MESAS ASIGNADAS =============================================
 SET ANSI_NULLS ON

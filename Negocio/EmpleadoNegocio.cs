@@ -117,8 +117,6 @@ namespace Negocio
                 empleado.Provincia = (string)accesoDatos.Reader["provincia"];
                 empleado.Perfil = (string)accesoDatos.Reader["perfil"];
 
-
-
                 return empleado;
             }
             catch (Exception ex)

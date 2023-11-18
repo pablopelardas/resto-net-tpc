@@ -51,7 +51,6 @@ namespace Negocio
                 datos.SetParameter("@numero", mesa.Numero);
                 datos.SetParameter("@capacidad", mesa.Capacidad);
 
-
                 datos.ExecuteNonQuery();
 
             }
@@ -116,7 +115,6 @@ namespace Negocio
                 datos.SetParameter("@id", mesa.Id);
                 datos.SetParameter("@numero", mesa.Numero);
                 datos.SetParameter("@capacidad", mesa.Capacidad);
-                datos.SetParameter("@estado", mesa.Estado);
 
                 datos.ExecuteNonQuery();
 

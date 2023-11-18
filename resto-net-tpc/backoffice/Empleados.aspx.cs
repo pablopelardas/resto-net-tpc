@@ -20,7 +20,7 @@ namespace resto_net_tpc
         protected void dgvEmpleados_SelectedIndexChanged(object sender, EventArgs e)
         {
             string id = dgvEmpleados.SelectedDataKey.Value.ToString();
-            Response.Redirect("../FormularioEmpleado.aspx?id=" + id, false);
+            Response.Redirect("./FormularioEmpleado.aspx?id=" + id, false);
         }
     }
 }
