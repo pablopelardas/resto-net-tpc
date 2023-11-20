@@ -95,12 +95,42 @@ namespace Negocio
             }
         }
 
+        public List<Mesa> ListarMesasNoAsignadas()
+        {
+            List<Mesa> lista = new List<Mesa>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetProcedure("spObtenerTodasLasMesasNoAsignadas");
+                datos.ReadData();
+
+                while (datos.Reader.Read())
+                {
+                    Mesa aux = ReadMesa(datos);
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
+            }
+        }
+
         private static Mesa ReadMesa(AccesoDatos accesoDatos)
         {
             Mesa mesa = new Mesa();
             mesa.Id = (int)accesoDatos.Reader["id"];
             mesa.Capacidad = (int)accesoDatos.Reader["capacidad"];
             mesa.Numero = (int)accesoDatos.Reader["numero"];
+            mesa.Asignada = (bool)accesoDatos.Reader["asignada"];
             mesa.Estado = (bool)accesoDatos.Reader["estado"];
             return mesa;
         }

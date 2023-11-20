@@ -440,6 +440,17 @@ BEGIN
 END
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerTodasLasMesasNoAsignadas
+AS
+BEGIN
+    SELECT * FROM mesas WHERE asignada = 0 and deleted_at IS NULL
+END
+GO
+
 
 -- ============================================= MESAS ASIGNADAS =============================================
 SET ANSI_NULLS ON
@@ -453,6 +464,8 @@ AS
 BEGIN
     INSERT INTO mesas_asignadas (mesa_id, empleado_id, fecha)
     VALUES (@mesa_id, @empleado_id, CAST(GETDATE() as date))
+
+	update mesas set asignada = 1 where id = @mesa_id
 END
 GO
 
@@ -472,6 +485,9 @@ END
 Go
 
 select * from mesas_asignadas
+
+select * from mesas where id NOT IN (1)
+
 
 
 
