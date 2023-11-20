@@ -45,6 +45,7 @@
     <Compile Include="Insumo.cs" />
     <Compile Include="Mesa.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="MesaAsignada.cs" />
     <Compile Include="Mesero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

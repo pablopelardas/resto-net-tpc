@@ -29,6 +29,8 @@ namespace resto_net_tpc.backoffice
                     ddlEmpleadosDisponibles.DataValueField = "Id";
                     ddlEmpleadosDisponibles.DataBind();
                 }
+
+                cargarMesasAsignadas();
             }
             catch (Exception ex)
             {
@@ -36,5 +38,37 @@ namespace resto_net_tpc.backoffice
             }
         }
 
+        protected void btnAsignar_Click(object sender, EventArgs e)
+        {
+            MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
+            try
+            {
+                int idMesa = int.Parse(ddlMesasDisponibles.SelectedItem.Value);
+                int idEmpleado = int.Parse(ddlEmpleadosDisponibles.SelectedItem.Value);
+
+                negocio.Asignar(idMesa, idEmpleado);
+                cargarMesasAsignadas();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                //Redireccionar..
+            }
+        }
+
+        protected void cargarMesasAsignadas()
+        {
+            MesasAsignadasNegocio mesasAsignadasNegocio = new MesasAsignadasNegocio();
+            try
+            {
+                dgvMesasAsignadas.DataSource = mesasAsignadasNegocio.Listar();
+                dgvMesasAsignadas.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
