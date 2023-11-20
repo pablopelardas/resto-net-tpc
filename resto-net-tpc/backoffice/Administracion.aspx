@@ -9,10 +9,7 @@
             </div>
 
             <nav class="menu">
-                <a href="#">Inicio</a>
-                <a href="#">Nosotros</a>
-                <a href="#">Blog</a>
-                <a href="#">Contacto</a>
+                <a href="../backoffice/Administracion.aspx">Inicio</a>
             </nav>
         </div>
     </div>
@@ -24,6 +21,7 @@
                 <a href="../backoffice/Empleados.aspx">Empleados</a>
                 <a href="../backoffice/Insumos.aspx">Insumos</a>
                 <a href="../backoffice/Mesas.aspx">Mesas</a>
+                <a href="../backoffice/AsignacionMesas.aspx">Asignar Mesas</a>
             </nav>
             <label for="btn-menu">✖️</label>
         </div>

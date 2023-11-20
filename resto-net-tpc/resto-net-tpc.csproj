@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="backoffice\Administracion.aspx" />
+    <Content Include="backoffice\AsignacionMesas.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -204,6 +205,13 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="backoffice\AsignacionMesas.aspx.cs">
+      <DependentUpon>AsignacionMesas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backoffice\AsignacionMesas.aspx.designer.cs">
+      <DependentUpon>AsignacionMesas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="backoffice\FormularioInsumo.aspx.cs">
       <DependentUpon>FormularioInsumo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
