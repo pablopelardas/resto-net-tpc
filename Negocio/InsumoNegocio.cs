@@ -165,7 +165,7 @@ namespace Negocio
 
 			try
 			{
-				datos.SetProcedure("spObtenerTodosLosInsumosAsignadosAlMenuInsumosPorCategoriaID");
+				datos.SetProcedure("spObtenerTodosLosInsumosPorCategoriaID");
 				datos.SetParameter("@id", id);
 				datos.ReadData();
 

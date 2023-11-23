@@ -14,12 +14,20 @@ namespace resto_net_tpc
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriaNegocio negocio = new CategoriaNegocio();
-
-            if (!IsPostBack)
+            try
             {
-                repCategorias.DataSource = negocio.Listar();
-                repCategorias.DataBind();
+                if (!IsPostBack)
+                {
+                    repCategorias.DataSource = negocio.Listar();
+                    repCategorias.DataBind();
+                }
             }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+            }
+            
         }
 
         protected void btnCategoria_Click(object sender, EventArgs e)
