@@ -1,7 +1,7 @@
 USE "RESTO-NET-TPC"
 GO
 
--- ============================================= EMPLEADOS =============================================
+-- ================== EMPLEADOS ==================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,10 +9,10 @@ GO
 CREATE PROCEDURE spObtenerTodosLosEmpleados
 AS
 BEGIN
-    SELECT * FROM empleados
-    WHERE deleted_at IS NULL
+    SELECT * FROM empleados WHERE deleted_at IS NULL
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -34,57 +34,57 @@ CREATE PROCEDURE spAgregarEmpleadoYUsuario
     @contrasenia VARCHAR(50)
 AS
 BEGIN
-    DECLARE @legajo VARCHAR(10);
-    DECLARE @ultimoLegajo INT;
+    DECLARE @legajo VARCHAR(10)
+    DECLARE @ultimoLegajo INT
 
     -- Determinar el tipo de empleado (M para mesero, G para gerente)
-    SET @legajo = 'E' + (CASE WHEN @perfil = 'gerente' THEN 'G' ELSE 'M' END);
+    SET @legajo = 'E' + (CASE WHEN @perfil = 'gerente' THEN 'G' ELSE 'M' END)
 
     -- Buscar el último legajo de empleados del mismo tipo (M o G)
     SELECT TOP 1 @ultimoLegajo = CAST(SUBSTRING(legajo, 3, 4) AS INT)
     FROM empleados
     WHERE SUBSTRING(legajo, 1, 2) = @legajo
-    ORDER BY CAST(SUBSTRING(legajo, 3, 4) AS INT) DESC;
+    ORDER BY CAST(SUBSTRING(legajo, 3, 4) AS INT) DESC
 
     -- Incrementar el número del legajo
-    SET @ultimoLegajo = ISNULL(@ultimoLegajo, 0) + 1;
+    SET @ultimoLegajo = ISNULL(@ultimoLegajo, 0) + 1
 
     -- Formatear el número del legajo a 4 dígitos
-    SET @legajo = @legajo + RIGHT('0000' + CAST(@ultimoLegajo AS VARCHAR), 4);
+    SET @legajo = @legajo + RIGHT('0000' + CAST(@ultimoLegajo AS VARCHAR), 4)
 
     -- Insertar el empleado
     INSERT INTO empleados (legajo, apellido, nombre, dni, fecha_nacimiento, fecha_ingreso, telefono, email, direccion, localidad, provincia, perfil, estado)
-    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @perfil, @estado);
+    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @perfil, @estado)
 
     -- Obtener el ID del empleado recién insertado
     DECLARE @empleado_id INT;
-    SET @empleado_id = SCOPE_IDENTITY();
+    SET @empleado_id = SCOPE_IDENTITY()
 
     -- Insertar el usuario asociado al empleado
     INSERT INTO usuarios (empleado_id, contrasenia)
-    VALUES (@empleado_id, @contrasenia);
+    VALUES (@empleado_id, @contrasenia)
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spObtenerEmpleadoPorID]
+CREATE PROCEDURE spObtenerEmpleadoPorID
     @id INT
 AS
 BEGIN
-    SELECT *
-    FROM empleados
-    WHERE id = @id;
+    SELECT * FROM empleados WHERE id = @id
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spActualizarEmpleado]
+CREATE PROCEDURE spActualizarEmpleado
     @id INT,
     @legajo VARCHAR(10),
     @apellido VARCHAR(50),
@@ -118,63 +118,34 @@ BEGIN
         provincia = @provincia,
         perfil = @perfil,
         estado = @estado
-    WHERE id = @id;
+    WHERE id = @id
 
     -- Actualizar la contraseña del usuario si se proporciona un valor para "contrasenia"
     IF @contrasenia IS NOT NULL
     BEGIN
-        UPDATE usuarios
-        SET contrasenia = @contrasenia
-        WHERE empleado_id = @id;
+        UPDATE usuarios SET contrasenia = @contrasenia
+        WHERE empleado_id = @id
     END
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[spEliminarEmpleado]
+CREATE PROCEDURE spEliminarEmpleado
     @id INT
 AS
 BEGIN
     UPDATE empleados
     SET estado = 0, fecha_egreso = GETDATE(), deleted_at = GETDATE()
-    WHERE id = @id;
+    WHERE id = @id
 END
 GO
 
 
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerEmpleadosEliminados]
-AS
-BEGIN
-	SELECT * FROM empleados
-    WHERE deleted_at IS NOT NULL;
-END
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spRestaurarEmpleado]
-	@id INT
-AS
-BEGIN
-	UPDATE empleados
-	SET estado = 1, fecha_egreso = NULL, deleted_at = NULL
-	WHERE id = @id;
-END
-GO
-
-
--- ============================================= INSUMOS =============================================
+-- ================== INSUMOS ==================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,6 +156,7 @@ BEGIN
     select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.estado = 1
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -203,6 +175,7 @@ BEGIN
 END
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -214,6 +187,7 @@ BEGIN
     select i.id as id, i.nombre as nombre, categoria_id, c.nombre as categoria_nombre, stock, stock_minimo, i.precio as precio, estado from insumos i Inner Join categorias c ON i.categoria_id = c.id where i.id = @id
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -239,6 +213,7 @@ BEGIN
 END
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -252,6 +227,7 @@ BEGIN
     WHERE id = @id;
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -272,7 +248,7 @@ END
 GO
 
 
--- ============================================= CATEGORIAS =============================================
+-- ================== CATEGORIAS ==================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -285,55 +261,7 @@ END
 GO
 
 
-
-
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spAgregarCategoria]
-    @nombre VARCHAR(50)
-AS
-BEGIN
-    INSERT INTO categorias (nombre)
-    VALUES (@nombre);
-END
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spActualizarCategoria]
-    @id INT,
-    @nombre VARCHAR(50)
-AS
-BEGIN
-    UPDATE categorias
-    SET nombre = @nombre
-    WHERE id = @id;
-END
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spEliminarCategoria]
-    @id INT
-AS
-BEGIN
-    UPDATE categorias
-    SET deleted_at = GETDATE()
-    WHERE id = @id;
-END
-GO
-
-
--- ============================================= MESAS =============================================
+-- ================== MESAS ==================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -341,11 +269,10 @@ GO
 CREATE PROCEDURE spObtenerTodasLasMesas
 AS
 BEGIN
-    SELECT *
-    FROM mesas
-    WHERE deleted_at IS NULL
+    SELECT * FROM mesas WHERE deleted_at IS NULL
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -368,13 +295,13 @@ BEGIN
     BEGIN
         IF @deleted_at IS NULL
         BEGIN
-            RAISERROR('001:Ya existe una mesa con ese número', 16, 1);
+            RAISERROR('001:Ya existe una mesa con ese número', 16, 1)
         END
         ELSE
         BEGIN
             UPDATE mesas
             SET deleted_at = NULL, capacidad = @capacidad, estado = 1
-            WHERE id = @mesa_id;
+            WHERE id = @mesa_id
 		END
     END
     ELSE
@@ -385,6 +312,7 @@ BEGIN
 END
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -393,11 +321,10 @@ CREATE PROCEDURE spObtenerMesaPorID
     @id INT
 AS
 BEGIN
-    SELECT *
-    FROM mesas
-    WHERE id = @id
+    SELECT * FROM mesas WHERE id = @id
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -413,6 +340,7 @@ BEGIN
 END
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -424,6 +352,7 @@ BEGIN
     UPDATE mesas SET estado = 0, deleted_at = GETDATE() WHERE id = @id
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -437,7 +366,7 @@ END
 GO
 
 
--- ============================================= MESAS ASIGNADAS =============================================
+-- ================== MESAS ASIGNADAS ==================
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -454,6 +383,7 @@ BEGIN
 END
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -469,6 +399,7 @@ BEGIN
 END
 Go
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -477,438 +408,307 @@ CREATE PROCEDURE spObtenerTodasLasMesasAsignadasPorId
 	@id INT
 AS
 BEGIN
-	select M.id, M.numero, M.capacidad, MA.estado from mesas_asignadas MA 
+	select MA.id, M.numero, M.capacidad, MA.estado from mesas_asignadas MA 
 	Inner Join mesas M ON MA.mesa_id = M.id
 	Where MA.empleado_id = @id
 END
 Go
+
+
+-- ================== PEDIDOS ==================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spAbrirPedido
+    @mesa_asignada_id INT
+AS
+BEGIN
+    INSERT INTO pedidos (mesa_asignada_id, apertura) VALUES (@mesa_asignada_id, GETDATE())
+END
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerPedidoAbiertoPorID
+    @idMesa INT
+AS
+BEGIN
+	select * from pedidos where mesa_asignada_id = @idMesa and cierre is null and estado = 1
+END
+GO
+
+
+select * from pedidos
+select * from pedidos_detalle
 select * from mesas_asignadas
+select * from mesas
 
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spActualizarMesaAsignada]
-    @id INT,
-    @mesa_id INT,
-    @empleado_id INT,
-    @fecha DATE,
-    @turno VARCHAR(20)
-AS
-BEGIN
-    UPDATE mesas_asignadas
-    SET
-        mesa_id = @mesa_id,
-        empleado_id = @empleado_id,
-        fecha = @fecha,
-        turno = @turno
-    WHERE id = @id;
-END
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spEliminarMesaAsignada]
-    @id INT
-AS
-BEGIN
-    UPDATE mesas_asignadas
-    SET deleted_at = GETDATE()
-    WHERE id = @id;
-END
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerMesaAsignadaPorId]
-    @id INT
-AS
-BEGIN
-    SELECT *
-    FROM mesas_asignadas
-    WHERE id = @id;
-END
-GO
+delete from pedidos
 
 
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerMesasAsignadasPorEmpleadoTurnoFecha]
-    @empleado_id INT,
-    @turno VARCHAR(20) = NULL,
-    @fecha DATE
-AS
-BEGIN
-    IF @turno IS NOT NULL
-    BEGIN
-        SELECT *
-        FROM mesas_asignadas
-        WHERE empleado_id = @empleado_id
-        AND turno = @turno
-        AND fecha = @fecha
-        AND deleted_at IS NULL;
-    END
-    ELSE
-    BEGIN
-        IF @fecha IS NOT NULL
-        BEGIN
-            SELECT *
-            FROM mesas_asignadas
-            WHERE empleado_id = @empleado_id
-            AND fecha = @fecha
-            AND deleted_at IS NULL;
-        END
-        ELSE
-        BEGIN
-            SELECT *
-            FROM mesas_asignadas
-            WHERE empleado_id = @empleado_id
-            AND deleted_at IS NULL;
-        END
-    END
-END
-GO
-
--- ============================================= PEDIDOS =============================================
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spAbrirPedido]
-    @mesa_asignada_id INT,
-    @apertura DATE,
-    @cierre DATE = NULL,
-    @estado VARCHAR(20) = 'abierto'
-AS
-BEGIN
-    INSERT INTO pedidos (mesa_asignada_id, apertura, cierre, estado)
-    VALUES (@mesa_asignada_id, @apertura, @cierre, @estado);
-END
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spActualizarPedido]
-    @id INT,
-    @mesa_asignada_id INT,
-    @apertura DATE,
-    @cierre DATE,
-    @estado VARCHAR(20)
-AS
-BEGIN
-    UPDATE pedidos
-    SET
-        mesa_asignada_id = @mesa_asignada_id,
-        apertura = @apertura,
-        cierre = @cierre,
-        estado = @estado
-    WHERE id = @id;
-END
-GO
+-- ================== PEDIDOS DETALLE ==================
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE spObtenerDetallePedido
+--AS
+--BEGIN
+--   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad from pedidos_detalle pd
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spEliminarPedido]
-    @id INT
-AS
-BEGIN
-    UPDATE pedidos
-    SET deleted_at = GETDATE()
-    WHERE id = @id;
-END
+
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spAgregarDetallePedido]
+--    @menu_insumo_id INT,
+--    @pedido_id INT,
+--    @cantidad INT
+--AS
+--BEGIN
+--    INSERT INTO pedidos_detalle (menu_insumo_id, pedido_id, cantidad)
+--    VALUES (@menu_insumo_id, @pedido_id, @cantidad);
+--END
+--GO
+
+--GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spActualizarDetallePedido]
+--    @id INT,
+--    @menu_insumo_id INT,
+--    @pedido_id INT,
+--    @cantidad INT
+--AS
+--BEGIN
+--    UPDATE pedidos_detalle
+--    SET
+--        menu_insumo_id = @menu_insumo_id,
+--        pedido_id = @pedido_id,
+--        cantidad = @cantidad
+--    WHERE id = @id;
+--END
+--GO
 
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerPedidoPorID]
-    @id INT
-AS
-BEGIN
-    SELECT *
-    FROM pedidos
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spEliminarDetallePedido]
+--    @id INT
+--AS
+--BEGIN
+--    UPDATE pedidos_detalle
+--    SET deleted_at = GETDATE()
+--    WHERE id = @id;
+--END
+--GO
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerTodosLosPedidos]
-AS
-BEGIN
-    SELECT *
-    FROM pedidos
-    WHERE deleted_at IS NULL;
-END
-GO
-
--- ============================================= PEDIDOS DETALLE =============================================
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spAgregarDetallePedido]
-    @menu_insumo_id INT,
-    @pedido_id INT,
-    @cantidad INT
-AS
-BEGIN
-    INSERT INTO pedidos_detalle (menu_insumo_id, pedido_id, cantidad)
-    VALUES (@menu_insumo_id, @pedido_id, @cantidad);
-END
-GO
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spActualizarDetallePedido]
-    @id INT,
-    @menu_insumo_id INT,
-    @pedido_id INT,
-    @cantidad INT
-AS
-BEGIN
-    UPDATE pedidos_detalle
-    SET
-        menu_insumo_id = @menu_insumo_id,
-        pedido_id = @pedido_id,
-        cantidad = @cantidad
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spObtenerDetallePedidoPorID]
+--    @id INT
+--AS
+--BEGIN
+--    SELECT *
+--    FROM pedidos_detalle
+--    WHERE id = @id;
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spEliminarDetallePedido]
-    @id INT
-AS
-BEGIN
-    UPDATE pedidos_detalle
-    SET deleted_at = GETDATE()
-    WHERE id = @id;
-END
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerDetallePedidoPorID]
-    @id INT
-AS
-BEGIN
-    SELECT *
-    FROM pedidos_detalle
-    WHERE id = @id;
-END
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerDetallePedidoPorPedidoID]
-    @pedido_id INT
-AS
-BEGIN
-    SELECT *
-    FROM pedidos_detalle
-    WHERE pedido_id = @pedido_id
-    AND deleted_at IS NULL;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spObtenerDetallePedidoPorPedidoID]
+--    @pedido_id INT
+--AS
+--BEGIN
+--    SELECT *
+--    FROM pedidos_detalle
+--    WHERE pedido_id = @pedido_id
+--    AND deleted_at IS NULL;
+--END
+--GO
 
 -- ============================================= FACTURAS =============================================
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spAgregarFactura]
-    @pedido_id INT,
-    @fecha DATE,
-    @total DECIMAL(10,2)
-AS
-BEGIN
-    INSERT INTO facturas (pedido_id, fecha, total)
-    VALUES (@pedido_id, @fecha, @total);
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spAgregarFactura]
+--    @pedido_id INT,
+--    @fecha DATE,
+--    @total DECIMAL(10,2)
+--AS
+--BEGIN
+--    INSERT INTO facturas (pedido_id, fecha, total)
+--    VALUES (@pedido_id, @fecha, @total);
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spActualizarFactura]
-    @id INT,
-    @pedido_id INT,
-    @fecha DATE,
-    @total DECIMAL(10,2)
-AS
-BEGIN
-    UPDATE facturas
-    SET
-        pedido_id = @pedido_id,
-        fecha = @fecha,
-        total = @total
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spActualizarFactura]
+--    @id INT,
+--    @pedido_id INT,
+--    @fecha DATE,
+--    @total DECIMAL(10,2)
+--AS
+--BEGIN
+--    UPDATE facturas
+--    SET
+--        pedido_id = @pedido_id,
+--        fecha = @fecha,
+--        total = @total
+--    WHERE id = @id;
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spEliminarFactura]
-    @id INT
-AS
-BEGIN
-    UPDATE facturas
-    SET deleted_at = GETDATE()
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spEliminarFactura]
+--    @id INT
+--AS
+--BEGIN
+--    UPDATE facturas
+--    SET deleted_at = GETDATE()
+--    WHERE id = @id;
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerFacturaPorID]
-    @id INT
-AS
-BEGIN
-    SELECT *
-    FROM facturas
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spObtenerFacturaPorID]
+--    @id INT
+--AS
+--BEGIN
+--    SELECT *
+--    FROM facturas
+--    WHERE id = @id;
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerTodasLasFacturas]
-AS
-BEGIN
-    SELECT *
-    FROM facturas
-    WHERE deleted_at IS NULL;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spObtenerTodasLasFacturas]
+--AS
+--BEGIN
+--    SELECT *
+--    FROM facturas
+--    WHERE deleted_at IS NULL;
+--END
+--GO
 
 -- ============================================= FACTURAS PAGOS =============================================
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spAgregarPagoFactura]
-    @factura_id INT,
-    @metodo VARCHAR(20),
-    @monto DECIMAL(10,2)
-AS
-BEGIN
-    INSERT INTO factura_pagos (factura_id, metodo, monto)
-    VALUES (@factura_id, @metodo, @monto);
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spAgregarPagoFactura]
+--    @factura_id INT,
+--    @metodo VARCHAR(20),
+--    @monto DECIMAL(10,2)
+--AS
+--BEGIN
+--    INSERT INTO factura_pagos (factura_id, metodo, monto)
+--    VALUES (@factura_id, @metodo, @monto);
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spActualizarPagoFactura]
-    @id INT,
-    @factura_id INT,
-    @metodo VARCHAR(20),
-    @monto DECIMAL(10,2)
-AS
-BEGIN
-    UPDATE factura_pagos
-    SET
-        factura_id = @factura_id,
-        metodo = @metodo,
-        monto = @monto
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spActualizarPagoFactura]
+--    @id INT,
+--    @factura_id INT,
+--    @metodo VARCHAR(20),
+--    @monto DECIMAL(10,2)
+--AS
+--BEGIN
+--    UPDATE factura_pagos
+--    SET
+--        factura_id = @factura_id,
+--        metodo = @metodo,
+--        monto = @monto
+--    WHERE id = @id;
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spEliminarPagoFactura]
-    @id INT
-AS
-BEGIN
-    UPDATE factura_pagos
-    SET deleted_at = GETDATE()
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spEliminarPagoFactura]
+--    @id INT
+--AS
+--BEGIN
+--    UPDATE factura_pagos
+--    SET deleted_at = GETDATE()
+--    WHERE id = @id;
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerPagoFacturaPorID]
-    @id INT
-AS
-BEGIN
-    SELECT *
-    FROM factura_pagos
-    WHERE id = @id;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spObtenerPagoFacturaPorID]
+--    @id INT
+--AS
+--BEGIN
+--    SELECT *
+--    FROM factura_pagos
+--    WHERE id = @id;
+--END
+--GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spObtenerPagosFacturaPorFacturaID]
-    @factura_id INT
-AS
-BEGIN
-    SELECT *
-    FROM factura_pagos
-    WHERE factura_id = @factura_id
-    AND deleted_at IS NULL;
-END
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--CREATE PROCEDURE [dbo].[spObtenerPagosFacturaPorFacturaID]
+--    @factura_id INT
+--AS
+--BEGIN
+--    SELECT *
+--    FROM factura_pagos
+--    WHERE factura_id = @factura_id
+--    AND deleted_at IS NULL;
+--END
+--GO
 

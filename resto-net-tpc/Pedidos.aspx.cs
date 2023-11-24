@@ -11,8 +11,10 @@ namespace resto_net_tpc
 {
     public partial class Pedidos : System.Web.UI.Page
     {
+        public Pedido PedidoActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
             CategoriaNegocio negocio = new CategoriaNegocio();
             try
             {
@@ -21,13 +23,26 @@ namespace resto_net_tpc
                     repCategorias.DataSource = negocio.Listar();
                     repCategorias.DataBind();
                 }
+
+                int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
+                if (idmesa != -1 && !IsPostBack)
+                {
+                    if (pedidoNegocio.BuscarPedidoAbierto(idmesa) == true)
+                    {
+                        PedidoActual = pedidoNegocio.ObtenerPedidoAbierto(idmesa);
+                    }
+                    else
+                    {
+                        PedidoActual = null;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex);
                 throw ex;
             }
-            
+
         }
 
         protected void btnCategoria_Click(object sender, EventArgs e)
@@ -39,6 +54,26 @@ namespace resto_net_tpc
                 repInsumosPorCategoria.DataSource = negocio.ListarInsumosPorCategoria(id);
                 repInsumosPorCategoria.DataBind();
 
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                // Redireccionar a pagina de error..
+            }
+        }
+
+        protected void btnIniciarPedido_Click(object sender, EventArgs e)
+        {
+            PedidoNegocio negocio = new PedidoNegocio();
+            try
+            {
+                int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
+                if (idmesa != -1)
+                {
+                    negocio.IniciarPedido(idmesa);
+                    PedidoActual = negocio.ObtenerPedidoAbierto(idmesa);
+                }
             }
             catch (Exception ex)
             {
