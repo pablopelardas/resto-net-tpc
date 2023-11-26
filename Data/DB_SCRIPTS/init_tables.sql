@@ -34,8 +34,7 @@ CREATE TABLE empleados
     CHECK (fecha_nacimiento <= fecha_ingreso),
     CHECK (fecha_egreso IS NULL OR fecha_ingreso <= fecha_egreso),
     CHECK (fecha_egreso IS NULL OR estado = 0),
-    CHECK (fecha_egreso IS NOT NULL OR estado = 1),
-    CHECK (perfil IN ('mesero', 'gerente')),
+    CHECK (fecha_egreso IS NOT NULL OR estado = 1)
 )
 GO
 
@@ -49,7 +48,7 @@ CREATE TABLE usuarios
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
     FOREIGN KEY (empleado_id) REFERENCES empleados(id),
-    UNIQUE (empleado_id),
+    UNIQUE (empleado_id)
 )
 GO
 
@@ -63,7 +62,7 @@ create TABLE mesas
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
-    UNIQUE (numero),
+    UNIQUE (numero)
 )
 GO
 
@@ -80,7 +79,7 @@ CREATE TABLE mesas_asignadas
     FOREIGN KEY (mesa_id) REFERENCES mesas(id),
     FOREIGN KEY (empleado_id) REFERENCES empleados(id),
     UNIQUE (mesa_id, fecha),
-    CHECK (estado IN ('libre', 'ocupada', 'reservada')),
+    CHECK (estado IN ('libre', 'ocupada', 'reservada'))
 )
 GO
 
@@ -91,7 +90,7 @@ CREATE TABLE categorias
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
-    UNIQUE (nombre),
+    UNIQUE (nombre)
 )
 GO
 
@@ -128,7 +127,7 @@ CREATE TABLE pedidos
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
     FOREIGN KEY (mesa_asignada_id) REFERENCES mesas_asignadas(id),
-    UNIQUE (mesa_asignada_id, apertura),
+    UNIQUE (mesa_asignada_id, apertura)
 )
 GO
 
@@ -144,7 +143,7 @@ CREATE TABLE pedidos_detalle
     FOREIGN KEY (insumo_id) REFERENCES insumos(id),
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
     UNIQUE (insumo_id, pedido_id),
-    CHECK (cantidad > 0),
+    CHECK (cantidad > 0)
 )
 GO
 
@@ -161,7 +160,7 @@ CREATE TABLE facturas
     PRIMARY KEY (id),
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
     UNIQUE (pedido_id),
-    CHECK (total > 0),
+    CHECK (total > 0)
 )
 GO
 
@@ -177,7 +176,7 @@ CREATE TABLE factura_pagos
     FOREIGN KEY (factura_id) REFERENCES facturas(id),
     UNIQUE (factura_id, metodo),
     CHECK (metodo IN ('efectivo', 'tarjeta')),
-    CHECK (monto > 0),
+    CHECK (monto > 0)
 )
 GO
 
