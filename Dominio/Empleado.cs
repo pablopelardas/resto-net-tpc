@@ -21,7 +21,6 @@ namespace Dominio
         public string Direccion { get; set; }
         public string Localidad { get; set; }
         public string Provincia { get; set; }
-        public string Perfil { get; set; }
         public string Pass { get; set; }
         public int Estado { get; set; }
 

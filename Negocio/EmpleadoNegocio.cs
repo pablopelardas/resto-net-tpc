@@ -38,7 +38,6 @@ namespace Negocio
                     aux.Direccion = !(datos.Reader["direccion"] is DBNull) ? (string)datos.Reader["direccion"] : "xxxxxxxxxx";
                     aux.Localidad = !(datos.Reader["localidad"] is DBNull) ? (string)datos.Reader["localidad"] : "xxxxxxxxxx";
                     aux.Provincia = !(datos.Reader["provincia"] is DBNull) ? (string)datos.Reader["provincia"] : "xxxxxxxxxx";
-                    aux.Perfil = (string)datos.Reader["perfil"];
 
                     lista.Add(aux);
                 }
@@ -72,9 +71,7 @@ namespace Negocio
                 datos.SetParameter("@direccion", empleado.Direccion);
                 datos.SetParameter("@localidad", empleado.Localidad);
                 datos.SetParameter("@provincia", empleado.Provincia);
-                datos.SetParameter("@perfil", empleado.Perfil);
                 datos.SetParameter("@estado", empleado.Estado);
-                datos.SetParameter("@contrasenia", empleado.Perfil);
 
                 datos.ExecuteNonQuery();
 
@@ -115,7 +112,6 @@ namespace Negocio
                 empleado.Direccion = (string)accesoDatos.Reader["direccion"];
                 empleado.Localidad = (string)accesoDatos.Reader["localidad"];
                 empleado.Provincia = (string)accesoDatos.Reader["provincia"];
-                empleado.Perfil = (string)accesoDatos.Reader["perfil"];
 
                 return empleado;
             }
@@ -148,7 +144,6 @@ namespace Negocio
                 datos.SetParameter("@direccion", empleado.Direccion);
                 datos.SetParameter("@localidad", empleado.Localidad);
                 datos.SetParameter("@provincia", empleado.Provincia);
-                datos.SetParameter("@perfil", empleado.Perfil);
                 datos.SetParameter("@estado", empleado.Estado);
                 datos.SetParameter("@contrasenia", empleado.Pass);
 

@@ -18,8 +18,8 @@
             <img class="mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUtT_9jt5iFJct-Wrgz91DpNN9ceZOsdglA&usqp=CAU" alt="" width="72" height="57">
 
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingUsuario" placeholder="Usuario">
-                <label for="floatingUsuario">Usuario</label>
+                <input type="text" class="form-control" id="floatingEmpleado" placeholder="N° de empleado">
+                <label for="floatingEmpleado">N° de empleado</label>
             </div>
 
             <div class="form-floating mb-3">

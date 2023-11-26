@@ -106,7 +106,6 @@ namespace resto_net_tpc
                 empleado.Direccion = tBoxDireccion.Text;
                 empleado.Localidad = tBoxLocalidad.Text;
                 empleado.Provincia = tBoxProvincia.Text;
-                empleado.Perfil = "mesero";
                 empleado.Estado = 1;
                 empleado.Pass = tBoxPass.Text;
                 if (!ValidateEmpleado(empleado))
