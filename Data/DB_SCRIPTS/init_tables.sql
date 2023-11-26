@@ -57,7 +57,7 @@ create TABLE mesas
     id int IDENTITY(1,1) NOT NULL,
     numero int NOT NULL,
     capacidad int NOT NULL,
-	asignada bit not null DEFAULT 0,
+    asignada bit not null DEFAULT 0,
     estado BIT NOT NULL DEFAULT 1,
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
