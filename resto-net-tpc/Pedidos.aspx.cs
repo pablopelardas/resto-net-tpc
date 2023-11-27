@@ -14,6 +14,8 @@ namespace resto_net_tpc
         public Pedido PedidoActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            PedidoDetalleNegocio pedidoDetalleNegocio = new PedidoDetalleNegocio();
+
             PedidoNegocio pedidoNegocio = new PedidoNegocio();
             CategoriaNegocio negocio = new CategoriaNegocio();
             try
@@ -22,10 +24,12 @@ namespace resto_net_tpc
                 {
                     repCategorias.DataSource = negocio.Listar();
                     repCategorias.DataBind();
-                }
 
+                    dgvPedidoDetalle.DataSource = pedidoDetalleNegocio.Listar();
+                    dgvPedidoDetalle.DataBind();
+                }
                 int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
-                if (idmesa != -1 && !IsPostBack)
+                if (idmesa != -1)
                 {
                     if (pedidoNegocio.BuscarPedidoAbierto(idmesa) == true)
                     {
@@ -53,7 +57,6 @@ namespace resto_net_tpc
                 int id = int.Parse(((Button)sender).CommandArgument);
                 repInsumosPorCategoria.DataSource = negocio.ListarInsumosPorCategoria(id);
                 repInsumosPorCategoria.DataBind();
-
             }
             catch (Exception ex)
             {

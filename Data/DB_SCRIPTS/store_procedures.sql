@@ -442,27 +442,19 @@ END
 GO
 
 
-select * from pedidos
-select * from pedidos_detalle
-select * from mesas_asignadas
-select * from mesas
-
-delete from pedidos
-
-
 
 
 -- ================== PEDIDOS DETALLE ==================
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE spObtenerDetallePedido
---AS
---BEGIN
---   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad from pedidos_detalle pd
---END
---GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerDetallePedido
+AS
+BEGIN
+   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad from pedidos_detalle pd
+END
+GO
 
 
 
