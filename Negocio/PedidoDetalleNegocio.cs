@@ -10,13 +10,14 @@ namespace Negocio
 {
     public class PedidoDetalleNegocio
     {
-        public List<PedidoDetalle> Listar()
+        public List<PedidoDetalle> Listar(int id)
         {
 			List<PedidoDetalle> lista = new List<PedidoDetalle>();
 			AccesoDatos datos = new AccesoDatos();
 			try
 			{
-				datos.SetProcedure("spObtenerDetallePedido");
+				datos.SetProcedure("spObtenerDetallePedidoActual");
+				datos.SetParameter("@pedido_id", id);
 				datos.ReadData();
 
 				while (datos.Reader.Read())

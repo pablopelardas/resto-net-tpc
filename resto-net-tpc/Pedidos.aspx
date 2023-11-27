@@ -37,7 +37,8 @@
                             <div class="mt-2">
                                 <asp:Repeater ID="repInsumosPorCategoria" runat="server">
                                     <ItemTemplate>
-                                        <asp:Button ID="btnInsumo" runat="server" Text='<% #Eval("Nombre") %>' />
+                                        <asp:Button ID="btnInsumo" OnClick="btnInsumo_Click" runat="server" Text='<% #Eval("Nombre") %>' 
+                                            CommandArgument='<% #Eval("Id") %>' CommandName="InsumoId" />
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>
@@ -47,7 +48,11 @@
                         <div class="col-4" style="background-color: darkolivegreen;">
                             <h2>Detalle Pedido</h2>
 
-                            <asp:GridView ID="dgvPedidoDetalle" runat="server"></asp:GridView>
+                            <%  if (PedidoActual != null)
+                                {  %>
+                                    <asp:GridView ID="dgvPedidoDetalle" runat="server"></asp:GridView>
+                            <%  }  %>
+
 
                         </div>
                     </div>

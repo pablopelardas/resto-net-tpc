@@ -449,29 +449,29 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE spObtenerDetallePedido
+CREATE PROCEDURE spObtenerDetallePedidoActual
+	@pedido_id int
 AS
 BEGIN
-   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad from pedidos_detalle pd
+   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad from pedidos_detalle pd where pd.pedido_id = @pedido_id
 END
 GO
 
 
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spAgregarDetallePedido]
---    @menu_insumo_id INT,
---    @pedido_id INT,
---    @cantidad INT
---AS
---BEGIN
---    INSERT INTO pedidos_detalle (menu_insumo_id, pedido_id, cantidad)
---    VALUES (@menu_insumo_id, @pedido_id, @cantidad);
---END
---GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spAgregarDetallePedido
+    @insumo_id INT,
+    @pedido_id INT,
+    @cantidad INT
+AS
+BEGIN
+    INSERT INTO pedidos_detalle (insumo_id, pedido_id, cantidad)
+    VALUES (@insumo_id, @pedido_id, @cantidad)
+END
+GO
 
 --GO
 --SET ANSI_NULLS ON
