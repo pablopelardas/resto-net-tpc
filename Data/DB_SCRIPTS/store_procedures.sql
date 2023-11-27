@@ -468,8 +468,13 @@ CREATE PROCEDURE spAgregarDetallePedido
     @cantidad INT
 AS
 BEGIN
-    INSERT INTO pedidos_detalle (insumo_id, pedido_id, cantidad)
-    VALUES (@insumo_id, @pedido_id, @cantidad)
+	if (select id from pedidos_detalle where insumo_id = @insumo_id and pedido_id = @pedido_id) is not null begin
+		update pedidos_detalle set cantidad = cantidad + 1 where insumo_id = @insumo_id and pedido_id = @pedido_id
+	end
+	else begin
+		INSERT INTO pedidos_detalle (insumo_id, pedido_id, cantidad)
+		VALUES (@insumo_id, @pedido_id, @cantidad)
+	end 
 END
 GO
 

@@ -50,7 +50,15 @@
 
                             <%  if (PedidoActual != null)
                                 {  %>
-                                    <asp:GridView ID="dgvPedidoDetalle" runat="server"></asp:GridView>
+                                    <asp:GridView ID="dgvPedidoDetalle" CssClass="table" AutoGenerateColumns="false" runat="server">
+                                        <Columns>
+                                            <asp:BoundField HeaderText="ID" DataField="Id" />
+                                            <asp:BoundField HeaderText="Insumo Id" DataField="InsumoId" />
+                                            <asp:BoundField HeaderText="Pedido Id" DataField="PedidoId" />
+                                            <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
+                                            <asp:CommandField ShowSelectButton="true" SelectText="eliminar" />
+                                        </Columns>
+                                    </asp:GridView>
                             <%  }  %>
 
 
