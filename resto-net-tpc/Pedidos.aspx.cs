@@ -185,5 +185,25 @@ namespace resto_net_tpc
                 // Redireccionar a pagina de error..
             }
         }
+
+        protected void btnRestar_Click(object sender, EventArgs e)
+        {
+            PedidoDetalleNegocio negocio = new PedidoDetalleNegocio();
+            try
+            {
+                int id = Session["idPedidoDetalle"] != null ? int.Parse(Session["idPedidoDetalle"].ToString()) : -1;
+                if (id != -1)
+                {
+                    negocio.RestarInsumo(id);
+                    cargarPedidoDetalle();
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                // Redireccionar a pagina de error..
+            }
+        }
     }
 }

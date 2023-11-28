@@ -492,6 +492,17 @@ END
 GO
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spRestarCantidadInsumo
+    @id INT
+AS
+BEGIN
+	update pedidos_detalle set cantidad = cantidad - 1 where id = @id
+END
+GO
 
 --GO
 --SET ANSI_NULLS ON

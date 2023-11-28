@@ -86,5 +86,25 @@ namespace Negocio
 				datos.CloseConnection();
 			}
 		}
+
+		public void RestarInsumo(int id)
+		{
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetProcedure("spRestarCantidadInsumo");
+                datos.SetParameter("@id", id);
+
+                datos.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
+            }
+        }
     }
 }
