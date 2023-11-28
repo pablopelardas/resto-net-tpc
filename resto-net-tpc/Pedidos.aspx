@@ -45,20 +45,27 @@
                         </div>
 
 
-                        <div class="col-4" style="background-color: darkolivegreen;">
+                        <div class="col-4">
                             <h2>Detalle Pedido</h2>
 
                             <%  if (PedidoActual != null)
                                 {  %>
-                                    <asp:GridView ID="dgvPedidoDetalle" CssClass="table" AutoGenerateColumns="false" runat="server">
+                                    <asp:GridView ID="dgvPedidoDetalle" CssClass="table" 
+                                        AutoGenerateColumns="false" runat="server"
+                                        DataKeyNames="Id" OnSelectedIndexChanged="dgvPedidoDetalle_SelectedIndexChanged" >
                                         <Columns>
                                             <asp:BoundField HeaderText="ID" DataField="Id" />
                                             <asp:BoundField HeaderText="Insumo Id" DataField="InsumoId" />
                                             <asp:BoundField HeaderText="Pedido Id" DataField="PedidoId" />
                                             <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
-                                            <asp:CommandField ShowSelectButton="true" SelectText="eliminar" />
+                                            <asp:CommandField ShowSelectButton="true" SelectText="➕" ControlStyle-CssClass="text-decoration-none btn" />
+                                            <asp:CommandField ShowSelectButton="true" SelectText="➖" ControlStyle-CssClass="text-decoration-none btn"  />
+                                            <asp:CommandField ShowSelectButton="true" SelectText="🗑️" ControlStyle-CssClass="text-decoration-none btn btn-danger" />
                                         </Columns>
                                     </asp:GridView>
+                                    
+                                    <asp:Label ID="Label1" runat="server" Text="Total"></asp:Label>
+                                    <asp:Button ID="btnCerrarPedido" CssClass="btn btn-danger" runat="server" Text="Cerrar pedido" />
                             <%  }  %>
 
 

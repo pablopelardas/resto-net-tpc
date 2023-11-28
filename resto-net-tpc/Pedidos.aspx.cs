@@ -93,7 +93,7 @@ namespace resto_net_tpc
                 aux.PedidoId = PedidoActual.Id;
                 aux.Cantidad = 1;
 
-                negocio.agregar(aux);
+                negocio.Agregar(aux);
                 cargarPedidoDetalle();
             }
             catch (Exception ex)
@@ -146,6 +146,23 @@ namespace resto_net_tpc
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        protected void dgvPedidoDetalle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PedidoDetalleNegocio negocio = new PedidoDetalleNegocio();
+            try
+            {
+                int id = int.Parse(dgvPedidoDetalle.SelectedDataKey.Value.ToString());
+                negocio.SumarInsumo(id);
+                cargarPedidoDetalle();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                // Redireccionar a pagina de error..
             }
         }
     }

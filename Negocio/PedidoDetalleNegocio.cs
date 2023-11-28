@@ -45,7 +45,7 @@ namespace Negocio
 			}
         }
 
-		public void agregar(PedidoDetalle pedidoDetalle)
+		public void Agregar(PedidoDetalle pedidoDetalle)
 		{
 			AccesoDatos datos = new AccesoDatos();
 			try
@@ -57,6 +57,26 @@ namespace Negocio
 
 				datos.ExecuteNonQuery();
             }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.CloseConnection();
+			}
+		}
+
+		public void SumarInsumo(int id)
+		{
+			AccesoDatos datos = new AccesoDatos();
+			try
+			{
+				datos.SetProcedure("spSumarCantidadInsumo");
+				datos.SetParameter("@id", id);
+
+				datos.ExecuteNonQuery();
+			}
 			catch (Exception ex)
 			{
 				throw ex;
