@@ -58,12 +58,16 @@
                                             <asp:BoundField HeaderText="Insumo Id" DataField="InsumoId" />
                                             <asp:BoundField HeaderText="Pedido Id" DataField="PedidoId" />
                                             <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
-                                            <asp:CommandField ShowSelectButton="true" SelectText="➕" ControlStyle-CssClass="text-decoration-none btn" />
-                                            <asp:CommandField ShowSelectButton="true" SelectText="➖" ControlStyle-CssClass="text-decoration-none btn"  />
-                                            <asp:CommandField ShowSelectButton="true" SelectText="🗑️" ControlStyle-CssClass="text-decoration-none btn btn-danger" />
+                                            <asp:CommandField ShowSelectButton="true" SelectText="✔️" ControlStyle-CssClass="text-decoration-none btn" />
                                         </Columns>
                                     </asp:GridView>
                                     
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <asp:Button ID="btnSumar" runat="server" Text="➕" OnClick="btnSumar_Click" CssClass="btn btn-outline-dark" />
+                                        <asp:Button ID="btnRestar" runat="server" Text="➖" CssClass="btn btn-outline-dark" />
+                                        <asp:Button ID="btnEliminar" runat="server" Text="🗑️" CssClass="btn btn-danger" />
+                                    </div>
+
                                     <asp:Label ID="Label1" runat="server" Text="Total"></asp:Label>
                                     <asp:Button ID="btnCerrarPedido" CssClass="btn btn-danger" runat="server" Text="Cerrar pedido" />
                             <%  }  %>

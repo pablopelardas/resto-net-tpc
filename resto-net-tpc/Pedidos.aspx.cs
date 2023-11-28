@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -151,12 +152,31 @@ namespace resto_net_tpc
 
         protected void dgvPedidoDetalle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PedidoDetalleNegocio negocio = new PedidoDetalleNegocio();
             try
             {
                 int id = int.Parse(dgvPedidoDetalle.SelectedDataKey.Value.ToString());
-                negocio.SumarInsumo(id);
-                cargarPedidoDetalle();
+                dgvPedidoDetalle.SelectedRowStyle.BackColor = Color.Silver;
+                Session.Add("idPedidoDetalle", id);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                // Redireccionar a pagina de error..
+            }
+        }
+
+        protected void btnSumar_Click(object sender, EventArgs e)
+        {
+            PedidoDetalleNegocio negocio = new PedidoDetalleNegocio();
+            try
+            {
+                int id = Session["idPedidoDetalle"] != null ? int.Parse(Session["idPedidoDetalle"].ToString()) : -1;
+                if (id != -1)
+                {
+                    negocio.SumarInsumo(id);
+                    cargarPedidoDetalle();
+                }
             }
             catch (Exception ex)
             {
