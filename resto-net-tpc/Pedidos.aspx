@@ -65,7 +65,7 @@
                                     <div class="d-flex justify-content-center gap-2">
                                         <asp:Button ID="btnSumar" runat="server" Text="➕" OnClick="btnSumar_Click" CssClass="btn btn-outline-dark" />
                                         <asp:Button ID="btnRestar" runat="server" Text="➖" OnClick="btnRestar_Click"  CssClass="btn btn-outline-dark" />
-                                        <asp:Button ID="btnEliminar" runat="server" Text="🗑️" CssClass="btn btn-danger" />
+                                        <asp:Button ID="btnEliminar" runat="server" Text="🗑️" OnClick="btnEliminar_Click" CssClass="btn btn-danger" />
                                     </div>
 
                                     <asp:Label ID="Label1" runat="server" Text="Total"></asp:Label>

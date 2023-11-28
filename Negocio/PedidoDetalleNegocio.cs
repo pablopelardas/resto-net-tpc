@@ -106,5 +106,25 @@ namespace Negocio
                 datos.CloseConnection();
             }
         }
+
+        public void Eliminar(int id)
+		{
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetProcedure("spEliminarDetallePedidoId");
+                datos.SetParameter("@id", id);
+
+                datos.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
+            }
+        }
     }
 }

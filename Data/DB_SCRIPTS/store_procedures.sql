@@ -526,73 +526,18 @@ END
 GO
 
 
-select *from insumos where id =4
-select * from pedidos_detalle where id =1
---GO
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spActualizarDetallePedido]
---    @id INT,
---    @menu_insumo_id INT,
---    @pedido_id INT,
---    @cantidad INT
---AS
---BEGIN
---    UPDATE pedidos_detalle
---    SET
---        menu_insumo_id = @menu_insumo_id,
---        pedido_id = @pedido_id,
---        cantidad = @cantidad
---    WHERE id = @id;
---END
---GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spEliminarDetallePedidoId
+    @id INT
+AS
+BEGIN
+    delete from pedidos_detalle where id = @id
+END
+GO
 
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spEliminarDetallePedido]
---    @id INT
---AS
---BEGIN
---    UPDATE pedidos_detalle
---    SET deleted_at = GETDATE()
---    WHERE id = @id;
---END
---GO
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spObtenerDetallePedidoPorID]
---    @id INT
---AS
---BEGIN
---    SELECT *
---    FROM pedidos_detalle
---    WHERE id = @id;
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spObtenerDetallePedidoPorPedidoID]
---    @pedido_id INT
---AS
---BEGIN
---    SELECT *
---    FROM pedidos_detalle
---    WHERE pedido_id = @pedido_id
---    AND deleted_at IS NULL;
---END
---GO
 
 -- ============================================= FACTURAS =============================================
 --SET ANSI_NULLS ON
