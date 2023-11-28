@@ -487,7 +487,16 @@ CREATE PROCEDURE spSumarCantidadInsumo
     @id INT
 AS
 BEGIN
-	update pedidos_detalle set cantidad = cantidad + 1 where id = @id
+	declare @CantStock int
+	set @CantStock = (select i.stock from pedidos_detalle pd inner join insumos i on pd.insumo_id = i.id where pd.id = @id)
+	
+	if @CantStock > 0  begin
+		
+		if (select pd.cantidad from pedidos_detalle pd where pd.id = @id) < @CantStock begin
+			update pedidos_detalle set cantidad = cantidad + 1 where id = @id
+		end
+
+	end
 END
 GO
 
@@ -516,9 +525,9 @@ BEGIN
 END
 GO
 
-select *from insumos
-select * from pedidos_detalle
 
+select *from insumos where id =4
+select * from pedidos_detalle where id =1
 --GO
 --SET ANSI_NULLS ON
 --GO
