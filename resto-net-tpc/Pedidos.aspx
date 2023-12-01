@@ -58,6 +58,7 @@
                                             <asp:BoundField HeaderText="Insumo Id" DataField="InsumoId" />
                                             <asp:BoundField HeaderText="Pedido Id" DataField="PedidoId" />
                                             <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
+                                            <asp:BoundField HeaderText="Precio" DataField="Insumo.Precio" />
                                             <asp:CommandField ShowSelectButton="true" SelectText="✔️" ControlStyle-CssClass="text-decoration-none btn" />
                                         </Columns>
                                     </asp:GridView>

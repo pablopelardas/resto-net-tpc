@@ -453,7 +453,10 @@ CREATE PROCEDURE spObtenerDetallePedidoActual
 	@pedido_id int
 AS
 BEGIN
-   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad from pedidos_detalle pd where pd.pedido_id = @pedido_id
+   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad, i.precio 
+   from pedidos_detalle pd 
+   inner join insumos i on pd.insumo_id = i.id
+   where pd.pedido_id = @pedido_id
 END
 GO
 
@@ -470,10 +473,13 @@ AS
 BEGIN
 	if (select id from pedidos_detalle where insumo_id = @insumo_id and pedido_id = @pedido_id) is not null begin
 		update pedidos_detalle set cantidad = cantidad + 1 where insumo_id = @insumo_id and pedido_id = @pedido_id
+		update insumos set stock = stock - 1 where id = @insumo_id
 	end
 	else begin
 		INSERT INTO pedidos_detalle (insumo_id, pedido_id, cantidad)
 		VALUES (@insumo_id, @pedido_id, @cantidad)
+
+		update insumos set stock = stock - @cantidad where id = @insumo_id
 	end 
 END
 GO
@@ -489,13 +495,17 @@ AS
 BEGIN
 	declare @CantStock int
 	set @CantStock = (select i.stock from pedidos_detalle pd inner join insumos i on pd.insumo_id = i.id where pd.id = @id)
-	
-	if @CantStock > 0  begin
-		
-		if (select pd.cantidad from pedidos_detalle pd where pd.id = @id) < @CantStock begin
-			update pedidos_detalle set cantidad = cantidad + 1 where id = @id
-		end
 
+	declare @IdInsumo int
+	set @IdInsumo = (select insumo_id from pedidos_detalle where id = @id)
+	
+	if @CantStock > 0  begin		
+		if (select pd.cantidad from pedidos_detalle pd where pd.id = @id) < @CantStock begin
+
+			update pedidos_detalle set cantidad = cantidad + 1 where id = @id
+			update insumos set stock = stock - 1 where id = @IdInsumo
+
+		end
 	end
 END
 GO
@@ -511,16 +521,19 @@ AS
 BEGIN
 	declare @CantStock int
 	set @CantStock = (select i.stock from pedidos_detalle pd inner join insumos i on pd.insumo_id = i.id where pd.id = @id)
+
+	declare @IdInsumo int
+	set @IdInsumo = (select insumo_id from pedidos_detalle where id = @id)
 	
-	if @CantStock >= 0  begin
-		
+	if @CantStock >= 0  begin		
 		if (select pd.cantidad from pedidos_detalle pd where pd.id = @id) = 1 begin
 			delete from pedidos_detalle where id = @id
+			update insumos set stock = stock + 1 where id = @IdInsumo
 		end
 		else begin
 			update pedidos_detalle set cantidad = cantidad - 1 where id = @id
+			update insumos set stock = stock + 1 where id = @IdInsumo
 		end
-
 	end
 END
 GO
@@ -534,173 +547,17 @@ CREATE PROCEDURE spEliminarDetallePedidoId
     @id INT
 AS
 BEGIN
+	declare @IdInsumo int
+	set @IdInsumo = (select insumo_id from pedidos_detalle where id = @id)
+
+	declare @Cantidad int
+	set @Cantidad = (select cantidad from pedidos_detalle where id = @id)
+	
+	update insumos set stock = stock + @Cantidad where id = @IdInsumo
     delete from pedidos_detalle where id = @id
 END
 GO
 
 
--- ============================================= FACTURAS =============================================
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spAgregarFactura]
---    @pedido_id INT,
---    @fecha DATE,
---    @total DECIMAL(10,2)
---AS
---BEGIN
---    INSERT INTO facturas (pedido_id, fecha, total)
---    VALUES (@pedido_id, @fecha, @total);
---END
---GO
 
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spActualizarFactura]
---    @id INT,
---    @pedido_id INT,
---    @fecha DATE,
---    @total DECIMAL(10,2)
---AS
---BEGIN
---    UPDATE facturas
---    SET
---        pedido_id = @pedido_id,
---        fecha = @fecha,
---        total = @total
---    WHERE id = @id;
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spEliminarFactura]
---    @id INT
---AS
---BEGIN
---    UPDATE facturas
---    SET deleted_at = GETDATE()
---    WHERE id = @id;
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spObtenerFacturaPorID]
---    @id INT
---AS
---BEGIN
---    SELECT *
---    FROM facturas
---    WHERE id = @id;
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spObtenerTodasLasFacturas]
---AS
---BEGIN
---    SELECT *
---    FROM facturas
---    WHERE deleted_at IS NULL;
---END
---GO
-
--- ============================================= FACTURAS PAGOS =============================================
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spAgregarPagoFactura]
---    @factura_id INT,
---    @metodo VARCHAR(20),
---    @monto DECIMAL(10,2)
---AS
---BEGIN
---    INSERT INTO factura_pagos (factura_id, metodo, monto)
---    VALUES (@factura_id, @metodo, @monto);
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spActualizarPagoFactura]
---    @id INT,
---    @factura_id INT,
---    @metodo VARCHAR(20),
---    @monto DECIMAL(10,2)
---AS
---BEGIN
---    UPDATE factura_pagos
---    SET
---        factura_id = @factura_id,
---        metodo = @metodo,
---        monto = @monto
---    WHERE id = @id;
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spEliminarPagoFactura]
---    @id INT
---AS
---BEGIN
---    UPDATE factura_pagos
---    SET deleted_at = GETDATE()
---    WHERE id = @id;
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spObtenerPagoFacturaPorID]
---    @id INT
---AS
---BEGIN
---    SELECT *
---    FROM factura_pagos
---    WHERE id = @id;
---END
---GO
-
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---CREATE PROCEDURE [dbo].[spObtenerPagosFacturaPorFacturaID]
---    @factura_id INT
---AS
---BEGIN
---    SELECT *
---    FROM factura_pagos
---    WHERE factura_id = @factura_id
---    AND deleted_at IS NULL;
---END
---GO
 

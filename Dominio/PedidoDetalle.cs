@@ -11,6 +11,7 @@ namespace Dominio
         public int Id { get; set; }
         public int InsumoId { get; set; }
         public int PedidoId { get; set; }
-        public int Cantidad { get; set; }  
+        public int Cantidad { get; set; }
+        public Insumo Insumo { get; set; }
     }
 }

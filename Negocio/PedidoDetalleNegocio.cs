@@ -28,6 +28,8 @@ namespace Negocio
 					aux.InsumoId = (int)datos.Reader["insumo_id"];
 					aux.PedidoId = (int)datos.Reader["pedido_id"];
 					aux.Cantidad = (int)datos.Reader["cantidad"];
+					aux.Insumo = new Insumo();
+					aux.Insumo.Precio = (decimal)datos.Reader["precio"];
 
 					lista.Add(aux);
 				}
