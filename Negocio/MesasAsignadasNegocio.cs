@@ -103,5 +103,58 @@ namespace Negocio
                 datos.CloseConnection();
             }
         }
+
+        public MesaAsignada BuscarMesaAsignada(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetProcedure("spObtenerMesaAsignadaPorId");
+                datos.SetParameter("@idMesa", id);
+                datos.ReadData();
+
+                MesaAsignada aux = new MesaAsignada();
+                datos.Reader.Read();
+
+                aux.IdMesaAsignada = (int)datos.Reader["id"];
+                aux.Id = (int)datos.Reader["mesa_id"];
+                aux.Numero = (int)datos.Reader["numero"];
+                aux.Empleado = new Empleado();
+                aux.Empleado.Id = (int)datos.Reader["empleado_id"];
+                aux.Empleado.Legajo = (string)datos.Reader["legajo"];
+                aux.Fecha = (DateTime)datos.Reader["fecha"];
+                aux.EstadoMesaAsignada = (string)datos.Reader["estado"];
+
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
+            }
+        }
+
+        public void LiberarMesaAsignada(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetProcedure("spLiberarMesaAsignadaPorId");
+                datos.SetParameter("@idMesaAsignada", id);
+
+                datos.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
+            }
+        }
     }
 }

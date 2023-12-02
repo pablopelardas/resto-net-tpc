@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace resto_net_tpc.backoffice
 {
     public partial class AsignacionMesas : System.Web.UI.Page
     {
+        public bool MesaLiberada = true;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -80,6 +82,38 @@ namespace resto_net_tpc.backoffice
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        protected void dgvMesasAsignadas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = int.Parse(dgvMesasAsignadas.SelectedDataKey.Value.ToString());
+            liberarMesaAsignada(id);
+            cargarDesplegables();
+            cargarMesasAsignadas();
+        }
+
+        protected void liberarMesaAsignada(int id)
+        {
+            MesaAsignada mesaAsignada = new MesaAsignada();
+            MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
+            try
+            {
+                mesaAsignada = negocio.BuscarMesaAsignada(id);
+                if (mesaAsignada.EstadoMesaAsignada == "libre")
+                {
+                    negocio.LiberarMesaAsignada(id);
+                }
+                else
+                {
+                    MesaLiberada = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                //Redireccionar..
             }
         }
     }

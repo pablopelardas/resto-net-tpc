@@ -415,6 +415,40 @@ END
 Go
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerMesaAsignadaPorId
+	@idMesa INT
+AS
+BEGIN
+	select MA.id as id, MA.mesa_id as mesa_id, M.numero as numero, MA.empleado_id as empleado_id, E.legajo as legajo, fecha, MA.estado as estado 
+	from mesas_asignadas MA
+	Inner Join mesas M ON MA.mesa_id = M.id
+	Inner Join empleados E ON MA.empleado_id = E.id
+	WHERE MA.deleted_at IS NULL and ma.id = @idMesa
+END
+Go
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spLiberarMesaAsignadaPorId
+	@idMesaAsignada INT
+AS
+BEGIN
+	declare @idMesa int
+	set @idMesa = (select mesa_id from mesas_asignadas where id = @idMesaAsignada)
+
+	update mesas_asignadas set deleted_at = GETDATE() where id = @idMesaAsignada
+	update mesas set asignada = 0 where id = @idMesa
+END
+Go
+
+
 -- ================== PEDIDOS ==================
 SET ANSI_NULLS ON
 GO
