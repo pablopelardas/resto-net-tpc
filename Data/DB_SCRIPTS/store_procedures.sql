@@ -425,6 +425,7 @@ CREATE PROCEDURE spAbrirPedido
 AS
 BEGIN
     INSERT INTO pedidos (mesa_asignada_id, apertura) VALUES (@mesa_asignada_id, GETDATE())
+	update mesas_asignadas set estado = 'ocupada' where id = @mesa_asignada_id
 END
 GO
 
@@ -451,6 +452,7 @@ CREATE PROCEDURE spCerrarPedido
 AS
 BEGIN
 	update pedidos set cierre = GETDATE(), estado = 0 where mesa_asignada_id = @mesa_asignada_id
+	update mesas_asignadas set estado = 'libre' where id = @mesa_asignada_id
 END
 GO
 
