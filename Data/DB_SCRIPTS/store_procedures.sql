@@ -559,5 +559,25 @@ END
 GO
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerTotalDetallePedidoID
+	@id int
+AS
+BEGIN
+	declare @CantidadPedida int
+	set @CantidadPedida = (select count(*) from pedidos_detalle where pedido_id = @id)
 
-
+	if @CantidadPedida != 0  begin
+		select CAST(SUM(pd.cantidad * i.precio) as decimal) as Total
+		from pedidos_detalle pd
+		inner join insumos i on pd.insumo_id = i.id
+		where pd.pedido_id = @id
+	end
+	else if @CantidadPedida = 0 begin
+		select CAST(0 as decimal) as Total
+	end
+END
+GO

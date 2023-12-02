@@ -128,5 +128,31 @@ namespace Negocio
                 datos.CloseConnection();
             }
         }
+
+		public decimal ObtenerTotalPedidoDetalleID(int id)
+		{
+			AccesoDatos datos = new AccesoDatos();
+			try
+			{
+				datos.SetProcedure("spObtenerTotalDetallePedidoID");
+				datos.SetParameter("@id", id);
+				datos.ReadData();
+
+				datos.Reader.Read();
+				decimal aux;
+
+				aux = (decimal)datos.Reader["Total"];
+				return aux;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.CloseConnection();
+			}
+		}
+
     }
 }

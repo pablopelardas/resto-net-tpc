@@ -96,6 +96,7 @@ namespace resto_net_tpc
 
                 negocio.Agregar(aux);
                 cargarPedidoDetalle();
+                dgvPedidoDetalle.SelectedRowStyle.BackColor = Color.White;
             }
             catch (Exception ex)
             {
@@ -114,7 +115,9 @@ namespace resto_net_tpc
                 {
                     dgvPedidoDetalle.DataSource = pedidoDetalleNegocio.Listar(PedidoActual.Id);
                     dgvPedidoDetalle.DataBind();
-                }                   
+
+                    lblTotal.Text = "Total $ " + pedidoDetalleNegocio.ObtenerTotalPedidoDetalleID(PedidoActual.Id).ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -134,7 +137,7 @@ namespace resto_net_tpc
                     if (pedidoNegocio.BuscarPedidoAbierto(idmesa) == true)
                     {
                         PedidoActual = pedidoNegocio.ObtenerPedidoAbierto(idmesa);
-                        encontro =  true;
+                        encontro = true;
                     }
                     else
                     {
@@ -196,6 +199,8 @@ namespace resto_net_tpc
                 {
                     negocio.RestarInsumo(id);
                     cargarPedidoDetalle();
+                    dgvPedidoDetalle.SelectedRowStyle.BackColor = Color.White;
+
                 }
             }
             catch (Exception ex)
@@ -216,6 +221,7 @@ namespace resto_net_tpc
                 {
                     negocio.Eliminar(id);
                     cargarPedidoDetalle();
+                    dgvPedidoDetalle.SelectedRowStyle.BackColor = Color.White;
                 }
             }
             catch (Exception ex)
@@ -225,5 +231,6 @@ namespace resto_net_tpc
                 // Redireccionar a pagina de error..
             }
         }
+
     }
 }

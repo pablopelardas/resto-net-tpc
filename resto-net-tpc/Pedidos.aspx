@@ -69,7 +69,7 @@
                                         <asp:Button ID="btnEliminar" runat="server" Text="🗑️" OnClick="btnEliminar_Click" CssClass="btn btn-danger" />
                                     </div>
 
-                                    <asp:Label ID="Label1" runat="server" Text="Total"></asp:Label>
+                                    <asp:Label ID="lblTotal" runat="server"></asp:Label>
                                     <asp:Button ID="btnCerrarPedido" CssClass="btn btn-danger" runat="server" Text="Cerrar pedido" />
                             <%  }  %>
 
