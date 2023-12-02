@@ -82,5 +82,25 @@ namespace Negocio
                 datos.CloseConnection();
             }
         }
+
+		public void CerrarPedido(int idmesa)
+		{
+			AccesoDatos datos = new AccesoDatos();
+			try
+			{
+				datos.SetProcedure("spCerrarPedido");
+				datos.SetParameter("@mesa_asignada_id", idmesa);
+
+				datos.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datos.CloseConnection();
+			}
+		}
     }
 }

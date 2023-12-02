@@ -232,5 +232,29 @@ namespace resto_net_tpc
             }
         }
 
+        protected void btnCerrarPedido_Click(object sender, EventArgs e)
+        {
+            PedidoNegocio negocio = new PedidoNegocio();
+            try
+            {
+                int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
+                if (idmesa != -1)
+                {
+                    negocio.CerrarPedido(idmesa);
+
+                    if (negocio.BuscarPedidoAbierto(idmesa) == false)
+                    {
+                        PedidoActual = null;
+                        Response.Redirect("MesasAsignadas.aspx", false);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
+                // Redireccionar a pagina de error..
+            }
+        }
     }
 }

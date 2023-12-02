@@ -442,6 +442,17 @@ END
 GO
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spCerrarPedido
+    @mesa_asignada_id INT
+AS
+BEGIN
+	update pedidos set cierre = GETDATE(), estado = 0 where mesa_asignada_id = @mesa_asignada_id
+END
+GO
 
 
 -- ================== PEDIDOS DETALLE ==================

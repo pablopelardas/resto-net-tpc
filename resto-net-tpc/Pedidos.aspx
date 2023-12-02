@@ -69,8 +69,10 @@
                                         <asp:Button ID="btnEliminar" runat="server" Text="🗑️" OnClick="btnEliminar_Click" CssClass="btn btn-danger" />
                                     </div>
 
-                                    <asp:Label ID="lblTotal" runat="server"></asp:Label>
-                                    <asp:Button ID="btnCerrarPedido" CssClass="btn btn-danger" runat="server" Text="Cerrar pedido" />
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <asp:Label ID="lblTotal" runat="server"></asp:Label>
+                                        <asp:Button ID="btnCerrarPedido" OnClick="btnCerrarPedido_Click" CssClass="btn btn-danger" runat="server" Text="Cerrar pedido" />
+                                    </div>
                             <%  }  %>
 
 
