@@ -1,6 +1,5 @@
 USE "RESTO-NET-TPC"
 GO
-
 -- ================== EMPLEADOS ==================
 SET ANSI_NULLS ON
 GO
@@ -29,7 +28,6 @@ CREATE PROCEDURE spAgregarEmpleadoYUsuario
     @direccion VARCHAR(50),
     @localidad VARCHAR(50),
     @provincia VARCHAR(50),
-    @perfil VARCHAR(20),
     @estado BIT,
     @contrasenia VARCHAR(50)
 AS
@@ -38,7 +36,7 @@ BEGIN
     DECLARE @ultimoLegajo INT
 
     -- Determinar el tipo de empleado (M para mesero, G para gerente)
-    SET @legajo = 'E' + (CASE WHEN @perfil = 'gerente' THEN 'G' ELSE 'M' END)
+    --SET @legajo = 'E' + (CASE WHEN @perfil = 'gerente' THEN 'G' ELSE 'M' END)
 
     -- Buscar el último legajo de empleados del mismo tipo (M o G)
     SELECT TOP 1 @ultimoLegajo = CAST(SUBSTRING(legajo, 3, 4) AS INT)
@@ -53,8 +51,8 @@ BEGIN
     SET @legajo = @legajo + RIGHT('0000' + CAST(@ultimoLegajo AS VARCHAR), 4)
 
     -- Insertar el empleado
-    INSERT INTO empleados (legajo, apellido, nombre, dni, fecha_nacimiento, fecha_ingreso, telefono, email, direccion, localidad, provincia, perfil, estado)
-    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @perfil, @estado)
+    INSERT INTO empleados (legajo, apellido, nombre, dni, fecha_nacimiento, fecha_ingreso, telefono, email, direccion, localidad, provincia, estado)
+    VALUES (@legajo, @apellido, @nombre, @dni, @fecha_nacimiento, @fecha_ingreso, @telefono, @email, @direccion, @localidad, @provincia, @estado)
 
     -- Obtener el ID del empleado recién insertado
     DECLARE @empleado_id INT;
@@ -116,7 +114,6 @@ BEGIN
         direccion = @direccion,
         localidad = @localidad,
         provincia = @provincia,
-        perfil = @perfil,
         estado = @estado
     WHERE id = @id
 
@@ -437,16 +434,19 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE spLiberarMesaAsignadaPorId
-	@idMesaAsignada INT
+	@idMesaAsignada int,
+	@idMesa int,
+	@fecha date
 AS
 BEGIN
-	declare @idMesa int
-	set @idMesa = (select mesa_id from mesas_asignadas where id = @idMesaAsignada)
-
-	update mesas_asignadas set deleted_at = GETDATE() where id = @idMesaAsignada
-	update mesas set asignada = 0 where id = @idMesa
+	if (select id from mesas_asignadas where id = @idMesaAsignada and mesa_id = @idMesa and fecha = @fecha) != '' begin
+		delete from mesas_asignadas where id = @idMesaAsignada
+		update mesas set asignada = 0 where id = @idMesa
+	end
 END
 Go
+
+
 
 
 -- ================== PEDIDOS ==================

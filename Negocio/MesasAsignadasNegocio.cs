@@ -137,13 +137,15 @@ namespace Negocio
             }
         }
 
-        public void LiberarMesaAsignada(int id)
+        public void LiberarMesaAsignada(int idMesaAsignada, int idMesa, DateTime fecha)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.SetProcedure("spLiberarMesaAsignadaPorId");
-                datos.SetParameter("@idMesaAsignada", id);
+                datos.SetParameter("@idMesaAsignada", idMesaAsignada);
+                datos.SetParameter("@idMesa", idMesa);
+                datos.SetParameter("@fecha", fecha);
 
                 datos.ExecuteNonQuery();
             }

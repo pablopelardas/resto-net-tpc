@@ -1,11 +1,11 @@
 USE "RESTO-NET-TPC"
 --seed empleados 
 INSERT INTO empleados
-    (legajo, nombre, apellido, dni, fecha_nacimiento, fecha_ingreso, fecha_egreso, telefono, email, direccion, localidad, provincia, perfil, estado)
+    (legajo, nombre, apellido, dni, fecha_nacimiento, fecha_ingreso, fecha_egreso, telefono, email, direccion, localidad, provincia, estado)
 VALUES
-    ('AA0001SC', 'Admin', 'Admin', '00000000', '1990-01-01', '2010-01-01', NULL, '00000000', 'admin@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield','gerente', 1),
-    ('EE0001SC', 'Empleado', 'Empleado', '11111111', '1990-01-01', '2010-01-01', NULL, '11111111', 'empleado@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 'mesero', 1),
-    ('EE0002SC', 'Empleado', 'Empleado', '22222222', '1990-01-01', '2010-01-01', NULL, '22222222', 'empleado2@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 'mesero', 1)
+    ('AA0001SC', 'Admin', 'Admin', '00000000', '1990-01-01', '2010-01-01', NULL, '00000000', 'admin@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1),
+    ('EE0001SC', 'Empleado', 'Empleado', '11111111', '1990-01-01', '2010-01-01', NULL, '11111111', 'empleado@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1),
+    ('EE0002SC', 'Empleado', 'Empleado', '22222222', '1990-01-01', '2010-01-01', NULL, '22222222', 'empleado2@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1)
 
 --seed usuarios
 INSERT INTO usuarios

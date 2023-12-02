@@ -17,7 +17,7 @@ namespace resto_net_tpc
         {
             // le paso un ID fijo hasta hacer el login y obtener el id del usuario que ingrese.
             MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
-            ListaMesasAsignadas = negocio.ListarMesasAsignadasPorId(4);
+            ListaMesasAsignadas = negocio.ListarMesasAsignadasPorId(1);
         }
     }
 }

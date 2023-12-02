@@ -71,7 +71,7 @@ CREATE TABLE mesas_asignadas
     id int IDENTITY(1,1) NOT NULL,
     mesa_id int NOT NULL,
     empleado_id int NOT NULL,
-    fecha DATE NOT NULL,
+    fecha DATETIME NOT NULL,
     estado VARCHAR(20) NOT NULL DEFAULT 'libre',
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
@@ -82,6 +82,7 @@ CREATE TABLE mesas_asignadas
     CHECK (estado IN ('libre', 'ocupada', 'reservada'))
 )
 GO
+
 
 CREATE TABLE categorias
 (
@@ -148,35 +149,4 @@ CREATE TABLE pedidos_detalle
 GO
 
 
-
-CREATE TABLE facturas
-(
-    id int IDENTITY(1,1) NOT NULL,
-    pedido_id int NOT NULL,
-    fecha DATE NOT NULL,
-    total DECIMAL(10,2) NOT NULL,
-    deleted_at DATETIME NULL DEFAULT NULL,
-    updated_at DATETIME NULL DEFAULT GETDATE(),
-    PRIMARY KEY (id),
-    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
-    UNIQUE (pedido_id),
-    CHECK (total > 0)
-)
-GO
-
-CREATE TABLE factura_pagos
-(
-    id int IDENTITY(1,1) NOT NULL,
-    factura_id int NOT NULL,
-    metodo VARCHAR(20) NOT NULL,
-    monto DECIMAL(10,2) NOT NULL,
-    deleted_at DATETIME NULL DEFAULT NULL,
-    updated_at DATETIME NULL DEFAULT GETDATE(),
-    PRIMARY KEY (id),
-    FOREIGN KEY (factura_id) REFERENCES facturas(id),
-    UNIQUE (factura_id, metodo),
-    CHECK (metodo IN ('efectivo', 'tarjeta')),
-    CHECK (monto > 0)
-)
-GO
 
