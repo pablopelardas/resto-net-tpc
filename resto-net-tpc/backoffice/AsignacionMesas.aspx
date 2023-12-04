@@ -32,7 +32,8 @@
         <ContentTemplate>
 
             <%-- Muestra las mesas y empleados disponibles. --%>
-           
+           <%   if (ListaMesasNoAsignadas.Count() != 0)
+                {%>
                     <div class="d-flex justify-content-center gap-4" style="margin-top: 110px;">
                         <div>
                             <label>Mesas disponibles</label>
@@ -44,13 +45,23 @@
                         </div>
                         <asp:Button ID="btnAsignar" OnClick="btnAsignar_Click" CssClass="btn btn-primary" runat="server" Text="Asignar" />
                     </div>
-
+            <%  }
+                else 
+                { %>
+                    <div style="margin-top: 110px;">
+                        <div class="alert alert-danger d-flex justify-content-between my-2" role="alert">
+                            Todas las mesas se encuentran asignadas.
+                        </div>
+                    </div>
+            <%  } %>
 
             <%  if (MesaLiberada == false)
                 {  %>
-                    <div class="alert alert-danger d-flex justify-content-between my-2" role="alert">
-                        No se puede liberar una mesa que se encuentra ocupada.
-                        <button class="btn btn-close"></button>
+                    <div style="margin-top: 110px;">
+                        <div class="alert alert-danger d-flex justify-content-between my-2" role="alert">
+                            No se puede liberar una mesa que se encuentra ocupada.
+                            <button class="btn btn-close"></button>
+                        </div>
                     </div>
             <%  }  %>
 

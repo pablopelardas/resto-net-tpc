@@ -11,6 +11,8 @@ namespace resto_net_tpc.backoffice
 {
     public partial class AsignacionMesas : System.Web.UI.Page
     {
+        public List<Mesa> ListaMesasNoAsignadas { get; set; }
+
         public bool MesaLiberada = true;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,7 +37,9 @@ namespace resto_net_tpc.backoffice
             EmpleadoNegocio empleadoNegocio = new EmpleadoNegocio();
             try
             {
-                ddlMesasDisponibles.DataSource = mesasNegocio.ListarMesasNoAsignadas();
+                ListaMesasNoAsignadas = mesasNegocio.ListarMesasNoAsignadas();
+
+                ddlMesasDisponibles.DataSource = ListaMesasNoAsignadas;
                 ddlMesasDisponibles.DataTextField = "Numero";
                 ddlMesasDisponibles.DataValueField = "Id";
                 ddlMesasDisponibles.DataBind();
@@ -99,12 +103,18 @@ namespace resto_net_tpc.backoffice
         protected void liberarMesaAsignada(int id)
         {
             MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
             try
             {
+                // 1.Tengo el registro de la mesa asignada que quiero liberar.
                 MesaAsignada mesaAsignada = negocio.BuscarMesaAsignada(id);
-                if (mesaAsignada.EstadoMesaAsignada == "libre")
+
+                // 2.Buscar si hay un pedido con esa mesa asignada.
+                bool pedidoAbierto = pedidoNegocio.BuscarPedidoAbierto(mesaAsignada.IdMesaAsignada);
+
+                if (pedidoAbierto == false && mesaAsignada.EstadoMesaAsignada == "libre")
                 {
-                    negocio.LiberarMesaAsignada(mesaAsignada.IdMesaAsignada, mesaAsignada.Id, mesaAsignada.Fecha);
+                    negocio.LiberarMesaAsignada(mesaAsignada.IdMesaAsignada, mesaAsignada.Id);
                 }
                 else
                 {

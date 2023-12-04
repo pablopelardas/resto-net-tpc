@@ -374,7 +374,7 @@ CREATE PROCEDURE spAsignarMesa
 AS
 BEGIN
     INSERT INTO mesas_asignadas (mesa_id, empleado_id, fecha)
-    VALUES (@mesa_id, @empleado_id, CAST(GETDATE() as date))
+    VALUES (@mesa_id, @empleado_id, GETDATE())
 
 	update mesas set asignada = 1 where id = @mesa_id
 END
@@ -407,7 +407,7 @@ AS
 BEGIN
 	select MA.id, M.numero, M.capacidad, MA.estado from mesas_asignadas MA 
 	Inner Join mesas M ON MA.mesa_id = M.id
-	Where MA.empleado_id = @id
+	Where MA.empleado_id = @id and MA.deleted_at is null
 END
 Go
 
@@ -435,18 +435,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE spLiberarMesaAsignadaPorId
 	@idMesaAsignada int,
-	@idMesa int,
-	@fecha date
+	@idMesa int
 AS
 BEGIN
-	if (select id from mesas_asignadas where id = @idMesaAsignada and mesa_id = @idMesa and fecha = @fecha) != '' begin
-		delete from mesas_asignadas where id = @idMesaAsignada
-		update mesas set asignada = 0 where id = @idMesa
-	end
+	update mesas_asignadas set deleted_at = GETDATE() where id = @idMesaAsignada
+	update mesas set asignada = 0 where id = @idMesa
 END
 Go
-
-
 
 
 -- ================== PEDIDOS ==================
