@@ -15,6 +15,17 @@ namespace resto_net_tpc
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("../Error.aspx", false);
+            }
+            else if (!(((Usuario)Session["usuario"]).Perfil == TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "No tienes permisos de administrador");
+                Response.Redirect("../Error.aspx", false);
+            }
+
             // Configuracion inicial de la pantalla.
             if (!IsPostBack)
             {
@@ -79,7 +90,7 @@ namespace resto_net_tpc
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
             InsumoNegocio negocio = new InsumoNegocio();
-            
+
             try
             {
                 negocio.Eliminar(Id);

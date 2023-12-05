@@ -15,9 +15,16 @@ namespace resto_net_tpc
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // le paso un ID fijo hasta hacer el login y obtener el id del usuario que ingrese.
-            MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
-            ListaMesasAsignadas = negocio.ListarMesasAsignadasPorId(1);
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+            }
+            else
+            {               
+                MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
+                ListaMesasAsignadas = negocio.ListarMesasAsignadasPorId(((Usuario)Session["usuario"]).Id);
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ AS
 BEGIN
     select U.id, U.perfil from usuarios U 
 	inner join empleados E ON U.empleado_id = E.id
-	where E.legajo = @usuario and  U.contrasenia = @contrasenia
+	where E.legajo like @usuario and  U.contrasenia like @contrasenia
 END
 GO
 select * from usuarios

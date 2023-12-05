@@ -28,9 +28,16 @@ namespace resto_net_tpc
 
                 if (negocio.BuscarUsuario(usuario))
                 {
-                  
-                    Session.Add("usuario", usuario);
-                    Response.Redirect("backoffice/Administracion.aspx", false);
+                    if (usuario.Perfil == TipoUsuario.ADMIN)
+                    {
+                        Session.Add("usuario", usuario);
+                        Response.Redirect("backoffice/Administracion.aspx", false);
+                    }
+                    else if (usuario.Perfil == TipoUsuario.NORMAL)
+                    {
+                        Session.Add("usuario", usuario);
+                        Response.Redirect("MesasAsignadas.aspx", false);
+                    }
                 }
                 else
                 {

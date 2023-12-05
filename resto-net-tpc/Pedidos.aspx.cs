@@ -15,36 +15,43 @@ namespace resto_net_tpc
         public Pedido PedidoActual { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            PedidoNegocio pedidoNegocio = new PedidoNegocio();
-            CategoriaNegocio negocio = new CategoriaNegocio();
-            try
+            if (Session["usuario"] == null)
             {
-                if (!IsPostBack)
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("Error.aspx", false);
+            }
+            else
+            {
+                PedidoNegocio pedidoNegocio = new PedidoNegocio();
+                CategoriaNegocio negocio = new CategoriaNegocio();
+                try
                 {
-                    repCategorias.DataSource = negocio.Listar();
-                    repCategorias.DataBind();
+                    if (!IsPostBack)
+                    {
+                        repCategorias.DataSource = negocio.Listar();
+                        repCategorias.DataBind();
 
-                    cargarPedidoDetalle();
+                        cargarPedidoDetalle();
+                    }
+                    int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
+                    if (idmesa != -1)
+                    {
+                        if (pedidoNegocio.BuscarPedidoAbierto(idmesa) == true)
+                        {
+                            PedidoActual = pedidoNegocio.ObtenerPedidoAbierto(idmesa);
+                        }
+                        else
+                        {
+                            PedidoActual = null;
+                        }
+                    }
                 }
-                int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
-                if (idmesa != -1)
+                catch (Exception ex)
                 {
-                    if (pedidoNegocio.BuscarPedidoAbierto(idmesa) == true)
-                    {
-                        PedidoActual = pedidoNegocio.ObtenerPedidoAbierto(idmesa);
-                    }
-                    else
-                    {
-                        PedidoActual = null;
-                    }
+                    Session.Add("error", ex);
+                    throw ex;
                 }
             }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex);
-                throw ex;
-            }
-
         }
 
         protected void btnCategoria_Click(object sender, EventArgs e)

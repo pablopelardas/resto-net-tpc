@@ -31,29 +31,32 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
 
-            <%-- Muestra las mesas y empleados disponibles. --%>
-           <%   if (ListaMesasNoAsignadas.Count() != 0)
-                {                    %>
-                    <div class="d-flex justify-content-center gap-4" style="margin-top: 110px;">
-                        <div>
-                            <label>Mesas disponibles</label>
-                            <asp:DropDownList ID="ddlMesasDisponibles" CssClass="btn btn-outline-dark dropdown-toggle" runat="server"></asp:DropDownList>
-                        </div>
-                        <div>
-                            <label>Empleados disponibles</label>
-                            <asp:DropDownList ID="ddlEmpleadosDisponibles" CssClass="btn btn-outline-dark dropdown-toggle" runat="server"></asp:DropDownList>
-                        </div>
-                        <asp:Button ID="btnAsignar" OnClick="btnAsignar_Click" CssClass="btn btn-primary" runat="server" Text="Asignar" />
-                    </div>
-            <%  }
-                else 
+            <% if (ListaMesasNoAsignadas != null)
                 { %>
-                    <div style="margin-top: 110px;">
-                        <div class="alert alert-danger d-flex justify-content-between my-2" role="alert">
-                            Todas las mesas se encuentran asignadas.
-                        </div>
-                    </div>
-            <%  } %>
+                    <%-- Muestra las mesas y empleados disponibles. --%>
+                   <%   if (ListaMesasNoAsignadas.Count() != 0)
+                       {                            %>
+                            <div class="d-flex justify-content-center gap-4" style="margin-top: 110px;">
+                                <div>
+                                    <label>Mesas disponibles</label>
+                                    <asp:DropDownList ID="ddlMesasDisponibles" CssClass="btn btn-outline-dark dropdown-toggle" runat="server"></asp:DropDownList>
+                                </div>
+                                <div>
+                                    <label>Empleados disponibles</label>
+                                    <asp:DropDownList ID="ddlEmpleadosDisponibles" CssClass="btn btn-outline-dark dropdown-toggle" runat="server"></asp:DropDownList>
+                                </div>
+                                <asp:Button ID="btnAsignar" OnClick="btnAsignar_Click" CssClass="btn btn-primary" runat="server" Text="Asignar" />
+                            </div>
+                    <%  }
+                        else
+                        { %>
+                            <div style="margin-top: 110px;">
+                                <div class="alert alert-danger d-flex justify-content-between my-2" role="alert">
+                                    Todas las mesas se encuentran asignadas.
+                                </div>
+                            </div>
+                    <%  } %>
+            <% } %>
 
             <%  if (MesaLiberada == false)
                 {  %>

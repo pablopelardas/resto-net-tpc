@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,21 @@ namespace resto_net_tpc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("../Error.aspx", false);
+            }
+            else if (!(((Usuario)Session["usuario"]).Perfil == TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "No tienes permisos de administrador");
+                Response.Redirect("../Error.aspx", false);
+            }
+
             InsumoNegocio negocio = new InsumoNegocio();
             dgvInsumos.DataSource = negocio.Listar();
             dgvInsumos.DataBind();
+
         }
 
         protected void dgvInsumos_SelectedIndexChanged(object sender, EventArgs e)

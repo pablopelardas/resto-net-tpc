@@ -15,6 +15,17 @@ namespace resto_net_tpc
         private int id = -1;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar");
+                Response.Redirect("../Error.aspx", false);
+            }
+            else if (!(((Usuario)Session["usuario"]).Perfil == TipoUsuario.ADMIN))
+            {
+                Session.Add("error", "No tienes permisos de administrador");
+                Response.Redirect("../Error.aspx", false);
+            }
+
             // check if user id is set in query string
             btnEliminar.Visible = false;
             isEditMode = Request.QueryString["id"] != null;
@@ -59,7 +70,6 @@ namespace resto_net_tpc
 
                 }
             }
-
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {

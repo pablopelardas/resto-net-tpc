@@ -18,6 +18,17 @@ namespace resto_net_tpc.backoffice
         {
             try
             {
+                if (Session["usuario"] == null)
+                {
+                    Session.Add("error", "Debes loguearte para ingresar");
+                    Response.Redirect("../Error.aspx", false);
+                }
+                else if (!(((Usuario)Session["usuario"]).Perfil == TipoUsuario.ADMIN))
+                {
+                    Session.Add("error", "No tienes permisos de administrador");
+                    Response.Redirect("../Error.aspx", false);
+                }
+
                 if (!IsPostBack)
                 {
                     cargarDesplegables();
@@ -88,9 +99,9 @@ namespace resto_net_tpc.backoffice
                 //Redireccionar..
             }
         }
-        
 
-        
+
+
 
         protected void dgvMesasAsignadas_SelectedIndexChanged(object sender, EventArgs e)
         {

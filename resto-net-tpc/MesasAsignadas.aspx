@@ -18,20 +18,22 @@
     </div>
 
     <div class="row row-cols-md-4 g-4 mt-0">
-
-        <%  foreach (Dominio.Mesa mesa in ListaMesasAsignadas)
-            { %>
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Mesa N° <%: mesa.Numero %></h5>
-                            <p class="card-text">Capacidad: <%: mesa.Capacidad %></p>
-                            <p class="card-text">Estado: <%: mesa.Ocupacion %></p>
-                            <a href="Pedidos.aspx?id=<%: mesa.Id %>" class="btn">Ver Detalle</a>
+        <% if (ListaMesasAsignadas != null)
+           { %>
+                <%  foreach (Dominio.Mesa mesa in ListaMesasAsignadas)
+                    { %>
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mesa N° <%: mesa.Numero %></h5>
+                                    <p class="card-text">Capacidad: <%: mesa.Capacidad %></p>
+                                    <p class="card-text">Estado: <%: mesa.Ocupacion %></p>
+                                    <a href="Pedidos.aspx?id=<%: mesa.Id %>" class="btn">Ver Detalle</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-        <%  } %>
+                <%  } %>
+        <% } %>
     </div>
 
 </asp:Content>
