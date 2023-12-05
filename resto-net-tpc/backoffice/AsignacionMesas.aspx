@@ -33,7 +33,7 @@
 
             <%-- Muestra las mesas y empleados disponibles. --%>
            <%   if (ListaMesasNoAsignadas.Count() != 0)
-                {%>
+                {                    %>
                     <div class="d-flex justify-content-center gap-4" style="margin-top: 110px;">
                         <div>
                             <label>Mesas disponibles</label>

@@ -125,6 +125,7 @@
     <Content Include="backoffice\Mesas.aspx" />
     <Content Include="backoffice\FormularioInsumo.aspx" />
     <Content Include="backoffice\Empleados.aspx" />
+    <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="backoffice\FormularioEmpleado.aspx" />
     <Content Include="Global.asax" />
@@ -247,6 +248,13 @@
     </Compile>
     <Compile Include="backoffice\FormularioEmpleado.aspx.designer.cs">
       <DependentUpon>FormularioEmpleado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

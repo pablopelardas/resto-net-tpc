@@ -1,5 +1,22 @@
 USE "RESTO-NET-TPC"
 GO
+-- ================== USUARIOS ==================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spBuscarUsuario
+	@usuario varchar(10),
+	@contrasenia varchar(50)
+AS
+BEGIN
+    select U.id, U.perfil from usuarios U 
+	inner join empleados E ON U.empleado_id = E.id
+	where E.legajo = @usuario and  U.contrasenia = @contrasenia
+END
+GO
+select * from usuarios
+
 -- ================== EMPLEADOS ==================
 SET ANSI_NULLS ON
 GO

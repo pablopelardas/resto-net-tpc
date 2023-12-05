@@ -43,7 +43,7 @@ CREATE TABLE usuarios
     id int IDENTITY(1,1) NOT NULL,
     empleado_id int NOT NULL,
     contrasenia VARCHAR(50) NOT NULL,
-    perfil int NOT NULL DEFAULT 1,
+    perfil int NOT NULL,
     deleted_at DATETIME NULL DEFAULT NULL,
     updated_at DATETIME NULL DEFAULT GETDATE(),
     PRIMARY KEY (id),
