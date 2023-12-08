@@ -12,7 +12,6 @@
     </style>
 
     <div class="row" style="margin-top: 10px;">
-
         <div class="form-signin w-100 m-auto contenedor">
 
             <img class="mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHUtT_9jt5iFJct-Wrgz91DpNN9ceZOsdglA&usqp=CAU" alt="" width="72" height="57">
@@ -36,9 +35,5 @@
             </div>
 
         </div>
-
     </div>
-
-
-
 </asp:Content>

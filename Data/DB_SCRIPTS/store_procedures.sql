@@ -29,6 +29,18 @@ BEGIN
 END
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE spObtenerTodosLosEmpleadosNoAdmin
+AS
+BEGIN
+    select E.id, E.legajo from empleados E
+	inner join usuarios U ON E.id = U.empleado_id where U.perfil = 1 and E.deleted_at is null
+END
+GO
+
 
 SET ANSI_NULLS ON
 GO

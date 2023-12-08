@@ -10,6 +10,7 @@
 
             <nav class="menu">
                 <a href="../backoffice/Administracion.aspx">Inicio</a>
+                <asp:Button ID="btnDesconectar" CssClass="btn btn-outline-info" runat="server" Text="Cerrar sesion" />
             </nav>
         </div>
     </div>

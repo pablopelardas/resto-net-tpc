@@ -33,7 +33,7 @@ namespace Negocio
                     aux.FechaNacimiento = (DateTime)datos.Reader["fecha_nacimiento"];
                     aux.FechaIngreso = (DateTime)datos.Reader["fecha_ingreso"];
                     aux.FechaEgreso = !(datos.Reader["fecha_egreso"] is DBNull) ? (DateTime)datos.Reader["fecha_egreso"] : DateTime.Parse("1/1/1000");
-                    aux.Telefono =  !(datos.Reader["telefono"] is DBNull) ? (string)datos.Reader["telefono"] : "xxxxxxxxxx";
+                    aux.Telefono = !(datos.Reader["telefono"] is DBNull) ? (string)datos.Reader["telefono"] : "xxxxxxxxxx";
                     aux.Email = !(datos.Reader["email"] is DBNull) ? (string)datos.Reader["email"] : "xxxxxxxxxx";
                     aux.Direccion = !(datos.Reader["direccion"] is DBNull) ? (string)datos.Reader["direccion"] : "xxxxxxxxxx";
                     aux.Localidad = !(datos.Reader["localidad"] is DBNull) ? (string)datos.Reader["localidad"] : "xxxxxxxxxx";
@@ -54,6 +54,37 @@ namespace Negocio
             }
         }
 
+        public List<Empleado> ListarEmpleadosNoAdmin()
+        {
+            List<Empleado> lista = new List<Empleado>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.SetProcedure("spObtenerTodosLosEmpleadosNoAdmin");
+                datos.ReadData();
+
+                while (datos.Reader.Read())
+                {
+                    Empleado aux = new Empleado();
+
+                    aux.Id = (int)datos.Reader["id"];
+                    aux.Legajo = (string)datos.Reader["legajo"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CloseConnection();
+            }
+        }
         public void Agregar(Empleado empleado)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -94,7 +125,7 @@ namespace Negocio
                 accesoDatos.SetProcedure("spObtenerEmpleadoPorId");
                 accesoDatos.SetParameter("@id", Id);
                 accesoDatos.ReadData();
-                
+
                 Empleado empleado = new Empleado();
                 // get first row from reader
                 accesoDatos.Reader.Read();
@@ -158,7 +189,7 @@ namespace Negocio
             {
                 datos.CloseConnection();
             }
-        }   
+        }
 
         public void Eliminar(int Id)
         {

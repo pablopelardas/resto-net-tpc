@@ -55,7 +55,7 @@ namespace resto_net_tpc.backoffice
                 ddlMesasDisponibles.DataValueField = "Id";
                 ddlMesasDisponibles.DataBind();
 
-                ddlEmpleadosDisponibles.DataSource = empleadoNegocio.Listar();
+                ddlEmpleadosDisponibles.DataSource = empleadoNegocio.ListarEmpleadosNoAdmin();
                 ddlEmpleadosDisponibles.DataTextField = "Legajo";
                 ddlEmpleadosDisponibles.DataValueField = "Id";
                 ddlEmpleadosDisponibles.DataBind();
@@ -99,9 +99,6 @@ namespace resto_net_tpc.backoffice
                 //Redireccionar..
             }
         }
-
-
-
 
         protected void dgvMesasAsignadas_SelectedIndexChanged(object sender, EventArgs e)
         {
