@@ -13,7 +13,18 @@ namespace resto_net_tpc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (Session["usuario"] != null)
+                {
+                    Session.Add("error", "Ya te encuentras logueado.");
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)

@@ -21,8 +21,7 @@ namespace resto_net_tpc
             {
                 Session.Add("error", "No tienes permisos de administrador");
                 Response.Redirect("../Error.aspx", false);
-            }
-            
+            }      
         }
     }
 }
