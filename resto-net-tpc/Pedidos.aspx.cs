@@ -66,8 +66,7 @@ namespace resto_net_tpc
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw ex;
-                // Redireccionar a pagina de error..
+                Response.Redirect("Error.aspx", false);
             }
         }
 

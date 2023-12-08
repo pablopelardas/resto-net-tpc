@@ -15,7 +15,7 @@ BEGIN
 	where E.legajo like @usuario and  U.contrasenia like @contrasenia
 END
 GO
-select * from usuarios
+
 
 -- ================== EMPLEADOS ==================
 SET ANSI_NULLS ON
@@ -28,6 +28,7 @@ BEGIN
     SELECT * FROM empleados WHERE deleted_at IS NULL
 END
 GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -642,7 +643,7 @@ BEGIN
 	set @CantidadPedida = (select count(*) from pedidos_detalle where pedido_id = @id)
 
 	if @CantidadPedida != 0  begin
-		select CAST(SUM(pd.cantidad * i.precio) as decimal) as Total
+		select SUM(pd.cantidad * i.precio) as Total
 		from pedidos_detalle pd
 		inner join insumos i on pd.insumo_id = i.id
 		where pd.pedido_id = @id
@@ -652,3 +653,8 @@ BEGIN
 	end
 END
 GO
+
+select * from pedidos_detalle where pedido_id = 5
+exec spObtenerTotalDetallePedidoID 5
+
+

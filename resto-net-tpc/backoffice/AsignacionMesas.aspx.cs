@@ -95,8 +95,7 @@ namespace resto_net_tpc.backoffice
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw ex;
-                //Redireccionar..
+                Response.Redirect("../Error.aspx", false);
             }
         }
 
@@ -132,8 +131,7 @@ namespace resto_net_tpc.backoffice
             catch (Exception ex)
             {
                 Session.Add("error", ex);
-                throw ex;
-                //Redireccionar..
+                Response.Redirect("../Error.aspx", false);
             }
         }
     }
