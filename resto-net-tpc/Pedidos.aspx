@@ -65,18 +65,22 @@
 
                             <%  if (PedidoActual != null)
                                 {  %>
-                                    <asp:GridView ID="dgvPedidoDetalle" CssClass="table"
-                                        AutoGenerateColumns="false" runat="server"
-                                        DataKeyNames="Id" OnSelectedIndexChanged="dgvPedidoDetalle_SelectedIndexChanged">
-                                        <Columns>
-                                            <asp:BoundField HeaderText="ID" DataField="Id" />
-                                            <asp:BoundField HeaderText="Insumo Id" DataField="InsumoId" />
-                                            <asp:BoundField HeaderText="Pedido Id" DataField="PedidoId" />
-                                            <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
-                                            <asp:BoundField HeaderText="Precio" DataField="Insumo.Precio" />
-                                            <asp:CommandField ShowSelectButton="true" SelectText="✔️" ControlStyle-CssClass="text-decoration-none btn" />
-                                        </Columns>
-                                    </asp:GridView>
+
+                                    <asp:Panel ID="Panel1" runat="server" Height="360px" ScrollBars="Auto">
+                                         <asp:GridView ID="dgvPedidoDetalle" CssClass="table"
+                                             AutoGenerateColumns="false" runat="server"
+                                             DataKeyNames="Id" OnSelectedIndexChanged="dgvPedidoDetalle_SelectedIndexChanged">
+                                             <Columns>
+                                                 <asp:BoundField HeaderText="ID" DataField="Id" />
+                                                 <asp:BoundField HeaderText="Insumo Id" DataField="InsumoId" />
+                                                 <asp:BoundField HeaderText="Pedido Id" DataField="PedidoId" />
+                                                 <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
+                                                 <asp:BoundField HeaderText="Precio" DataField="Insumo.Precio" />
+                                                 <asp:CommandField ShowSelectButton="true" SelectText="✔️" ControlStyle-CssClass="text-decoration-none btn" />
+                                             </Columns>
+                                         </asp:GridView>
+                                    </asp:Panel>
+                                   
 
                                     <div class="d-flex justify-content-center gap-2">
                                         <asp:Button ID="btnSumar" runat="server" Text="➕" OnClick="btnSumar_Click" CssClass="btn btn-outline-dark" />
