@@ -11,6 +11,7 @@
                         <div class="container">
                             <nav class="menu">
                                 <a href="MesasAsignadas.aspx">Inicio</a>
+                                <asp:Button ID="btnDesconectar" OnClick="btnDesconectar_Click" runat="server" CssClass="btn btn-outline-info" Text="Cerrar sesion" />
                             </nav>
                         </div>
                     </div>
@@ -28,6 +29,7 @@
                         <div class="container">
                             <nav class="menu">
                                 <a href="MesasAsignadas.aspx">Inicio</a>
+                                <asp:Button ID="btnDesconectar2" OnClick="btnDesconectar_Click" runat="server" CssClass="btn btn-outline-info" Text="Cerrar sesion" />
                             </nav>
                         </div>
                     </div>

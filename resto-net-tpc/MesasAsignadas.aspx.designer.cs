@@ -13,5 +13,14 @@ namespace resto_net_tpc
 
     public partial class MesasAsignadas
     {
+
+        /// <summary>
+        /// Control btnDesconectar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDesconectar;
     }
 }

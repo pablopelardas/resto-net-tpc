@@ -6,6 +6,7 @@
         <div class="container">
             <nav class="menu">
                 <a href="MesasAsignadas.aspx">Inicio</a>
+                <asp:Button ID="btnDesconectar" OnClick="btnDesconectar_Click" CssClass="btn btn-outline-info" runat="server" Text="Cerrar sesion" />
             </nav>
         </div>
     </div>

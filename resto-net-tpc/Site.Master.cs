@@ -13,5 +13,19 @@ namespace resto_net_tpc
         {
 
         }
+
+        protected void btnDesconectar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session.Remove("usuario");
+                Response.Redirect("../Login.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
     }
 }
