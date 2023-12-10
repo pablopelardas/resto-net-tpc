@@ -20,37 +20,40 @@ namespace resto_net_tpc
                 Session.Add("error", "Debes loguearte para ingresar");
                 Response.Redirect("Error.aspx", false);
             }
-            else
+            else if (!(((Usuario)Session["usuario"]).Perfil == TipoUsuario.NORMAL))
             {
-                PedidoNegocio pedidoNegocio = new PedidoNegocio();
-                CategoriaNegocio negocio = new CategoriaNegocio();
-                try
-                {
-                    if (!IsPostBack)
-                    {
-                        repCategorias.DataSource = negocio.Listar();
-                        repCategorias.DataBind();
+                Session.Add("error", "Debes loguearte como mesero");
+                Response.Redirect("Error.aspx", false);
+            }
 
-                        cargarPedidoDetalle();
-                    }
-                    int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
-                    if (idmesa != -1)
-                    {
-                        if (pedidoNegocio.BuscarPedidoAbierto(idmesa) == true)
-                        {
-                            PedidoActual = pedidoNegocio.ObtenerPedidoAbierto(idmesa);
-                        }
-                        else
-                        {
-                            PedidoActual = null;
-                        }
-                    }
-                }
-                catch (Exception ex)
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
+            CategoriaNegocio negocio = new CategoriaNegocio();
+            try
+            {
+                if (!IsPostBack)
                 {
-                    Session.Add("error", ex);
-                    throw ex;
+                    repCategorias.DataSource = negocio.Listar();
+                    repCategorias.DataBind();
+
+                    cargarPedidoDetalle();
                 }
+                int idmesa = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"].ToString()) : -1;
+                if (idmesa != -1)
+                {
+                    if (pedidoNegocio.BuscarPedidoAbierto(idmesa) == true)
+                    {
+                        PedidoActual = pedidoNegocio.ObtenerPedidoAbierto(idmesa);
+                    }
+                    else
+                    {
+                        PedidoActual = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw ex;
             }
         }
 

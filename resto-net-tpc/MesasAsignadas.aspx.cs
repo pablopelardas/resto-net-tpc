@@ -20,11 +20,14 @@ namespace resto_net_tpc
                 Session.Add("error", "Debes loguearte para ingresar");
                 Response.Redirect("Error.aspx", false);
             }
-            else
-            {               
-                MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
-                ListaMesasAsignadas = negocio.ListarMesasAsignadasPorId(((Usuario)Session["usuario"]).Id);
+            else if (!(((Usuario)Session["usuario"]).Perfil == TipoUsuario.NORMAL))
+            {
+                Session.Add("error", "Debes loguearte como mesero");
+                Response.Redirect("Error.aspx", false);
             }
+
+            MesasAsignadasNegocio negocio = new MesasAsignadasNegocio();
+            ListaMesasAsignadas = negocio.ListarMesasAsignadasPorId(((Usuario)Session["usuario"]).Id);
         }
     }
 }
