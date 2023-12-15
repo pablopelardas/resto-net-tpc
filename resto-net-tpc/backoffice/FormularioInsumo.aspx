@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row">
+    <div class="row" style="margin-top:110px;">
         <div class="col-12 d-flex flex-column align-items-center">
             <div class="mb-3">
                 <asp:Label ID="lblCategoria" CssClass="form-label" runat="server" Text="Categoria"></asp:Label>

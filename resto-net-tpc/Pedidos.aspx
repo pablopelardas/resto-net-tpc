@@ -73,9 +73,7 @@
                                              AutoGenerateColumns="false" runat="server"
                                              DataKeyNames="Id" OnSelectedIndexChanged="dgvPedidoDetalle_SelectedIndexChanged">
                                              <Columns>
-                                                 <asp:BoundField HeaderText="ID" DataField="Id" />
-                                                 <asp:BoundField HeaderText="Insumo Id" DataField="InsumoId" />
-                                                 <asp:BoundField HeaderText="Pedido Id" DataField="PedidoId" />
+                                                 <asp:BoundField HeaderText="Insumo" DataField="Insumo.Nombre" />
                                                  <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                                                  <asp:BoundField HeaderText="Precio" DataField="Insumo.Precio" />
                                                  <asp:CommandField ShowSelectButton="true" SelectText="✔️" ControlStyle-CssClass="text-decoration-none btn" />

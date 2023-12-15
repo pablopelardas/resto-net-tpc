@@ -23,6 +23,7 @@ namespace Dominio
         public string Provincia { get; set; }
         public string Pass { get; set; }
         public int Estado { get; set; }
+        public Usuario Usuario { get; set; }
 
     }
 }

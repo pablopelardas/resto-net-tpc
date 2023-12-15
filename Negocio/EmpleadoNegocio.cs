@@ -103,6 +103,8 @@ namespace Negocio
                 datos.SetParameter("@localidad", empleado.Localidad);
                 datos.SetParameter("@provincia", empleado.Provincia);
                 datos.SetParameter("@estado", empleado.Estado);
+                datos.SetParameter("@contrasenia", empleado.Usuario.Contrasenia);
+                datos.SetParameter("@legajo", empleado.Legajo);
 
                 datos.ExecuteNonQuery();
 

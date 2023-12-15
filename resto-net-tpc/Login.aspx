@@ -30,9 +30,9 @@
                 <asp:Button ID="btnIngresar" OnClick="btnIngresar_Click" class="btn btn-primary" runat="server" Text="Ingresar" />
             </div>
 
-            <div style="margin-top: 10px;">
+           <%-- <div style="margin-top: 10px;">
                 <a href="/Registro.aspx" class="btn btn-outline-secondary">Todavía no tenés un usuario? Registrate</a>
-            </div>
+            </div>--%>
 
         </div>
     </div>

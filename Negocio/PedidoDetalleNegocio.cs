@@ -30,6 +30,7 @@ namespace Negocio
 					aux.Cantidad = (int)datos.Reader["cantidad"];
 					aux.Insumo = new Insumo();
 					aux.Insumo.Precio = (decimal)datos.Reader["precio"];
+					aux.Insumo.Nombre = (string)datos.Reader["nombre"];
 
 					lista.Add(aux);
 				}

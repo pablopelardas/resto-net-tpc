@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row">
+    <div class="row"  style="margin-top: 110px;">
         <div class="col-6 d-flex flex-column align-items-end">
 
             <div class="mb-3">

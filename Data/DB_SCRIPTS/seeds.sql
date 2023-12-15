@@ -3,17 +3,17 @@ USE "RESTO-NET-TPC"
 INSERT INTO empleados
     (legajo, nombre, apellido, dni, fecha_nacimiento, fecha_ingreso, fecha_egreso, telefono, email, direccion, localidad, provincia, estado)
 VALUES
-    ('AA0001SC', 'Admin', 'Admin', '00000000', '1990-01-01', '2010-01-01', NULL, '00000000', 'admin@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1),
-    ('EE0001SC', 'Empleado', 'Empleado', '11111111', '1990-01-01', '2010-01-01', NULL, '11111111', 'empleado@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1),
-    ('EE0002SC', 'Empleado', 'Empleado', '22222222', '1990-01-01', '2010-01-01', NULL, '22222222', 'empleado2@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1)
+    ('G01', 'Admin', 'Admin', '00000000', '1990-01-01', '2010-01-01', NULL, '00000000', 'admin@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1),
+    ('M01', 'Empleado', 'Empleado', '11111111', '1990-01-01', '2010-01-01', NULL, '11111111', 'empleado@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1),
+    ('M02', 'Empleado', 'Empleado', '22222222', '1990-01-01', '2010-01-01', NULL, '22222222', 'empleado2@gmail.com', 'Calle Falsa 123', 'Springfield', 'Springfield', 1)
 
 --seed usuarios
 INSERT INTO usuarios
-    (empleado_id, contrasenia)
+    (empleado_id, contrasenia, perfil)
 VALUES
-    (1, 'admin'),
-    (2, 'empleado'),
-    (3, 'empleado2');
+    (1, 'admin123', 2),
+    (2, 'mesero1', 1),
+    (3, 'mesero2', 1);
 
 --seed mesas
 INSERT INTO mesas

@@ -27,8 +27,8 @@ namespace resto_net_tpc
             }
 
             // check if user id is set in query string
-            tBoxLegajo.Enabled = false;
-            toggleLegajo(false);
+            //tBoxLegajo.Enabled = false;
+            //toggleLegajo(false);
             isEditMode = Request.QueryString["id"] != null;
             if (isEditMode)
             {
@@ -64,7 +64,7 @@ namespace resto_net_tpc
                             tBoxLocalidad.Text = empleado.Localidad;
                             tBoxProvincia.Text = empleado.Provincia;
                             tBoxPass.Text = empleado.Pass;
-                            toggleLegajo(true);
+                            //toggleLegajo(true);
                         }
                     }
                     catch (Exception ex)
@@ -78,11 +78,11 @@ namespace resto_net_tpc
             }
         }
 
-        private void toggleLegajo(bool visible)
-        {
-            tBoxLegajo.Visible = visible;
-            lblLegajo.Visible = visible;
-        }
+        //private void toggleLegajo(bool visible)
+        //{
+        //    tBoxLegajo.Visible = visible;
+        //    lblLegajo.Visible = visible;
+        //}
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -118,12 +118,14 @@ namespace resto_net_tpc
                 empleado.Provincia = tBoxProvincia.Text;
                 empleado.Estado = 1;
                 empleado.Pass = tBoxPass.Text;
+                empleado.Usuario = new Usuario();
+                empleado.Usuario.Contrasenia = tBoxPass.Text;
+                empleado.Legajo = tBoxLegajo.Text;
                 if (!ValidateEmpleado(empleado))
                     return;
                 if (id >= 0)
                 {
                     empleado.Id = int.Parse(Request.QueryString["id"]);
-                    empleado.Legajo = tBoxLegajo.Text;
                     empleadoNegocio.Modificar(empleado);
                 }
                 else

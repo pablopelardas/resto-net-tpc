@@ -48,6 +48,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE spAgregarEmpleadoYUsuario
+	@legajo VARCHAR(50),
     @apellido VARCHAR(50),
     @nombre VARCHAR(50),
     @dni VARCHAR(10),
@@ -62,23 +63,6 @@ CREATE PROCEDURE spAgregarEmpleadoYUsuario
     @contrasenia VARCHAR(50)
 AS
 BEGIN
-    DECLARE @legajo VARCHAR(10)
-    DECLARE @ultimoLegajo INT
-
-    -- Determinar el tipo de empleado (M para mesero, G para gerente)
-    --SET @legajo = 'E' + (CASE WHEN @perfil = 'gerente' THEN 'G' ELSE 'M' END)
-
-    -- Buscar el último legajo de empleados del mismo tipo (M o G)
-    SELECT TOP 1 @ultimoLegajo = CAST(SUBSTRING(legajo, 3, 4) AS INT)
-    FROM empleados
-    WHERE SUBSTRING(legajo, 1, 2) = @legajo
-    ORDER BY CAST(SUBSTRING(legajo, 3, 4) AS INT) DESC
-
-    -- Incrementar el número del legajo
-    SET @ultimoLegajo = ISNULL(@ultimoLegajo, 0) + 1
-
-    -- Formatear el número del legajo a 4 dígitos
-    SET @legajo = @legajo + RIGHT('0000' + CAST(@ultimoLegajo AS VARCHAR), 4)
 
     -- Insertar el empleado
     INSERT INTO empleados (legajo, apellido, nombre, dni, fecha_nacimiento, fecha_ingreso, telefono, email, direccion, localidad, provincia, estado)
@@ -125,7 +109,6 @@ CREATE PROCEDURE spActualizarEmpleado
     @direccion VARCHAR(50),
     @localidad VARCHAR(50),
     @provincia VARCHAR(50),
-    @perfil VARCHAR(20),
     @estado BIT,
     @contrasenia VARCHAR(50) = NULL -- Parámetro opcional para la contraseña
 AS
@@ -525,7 +508,7 @@ CREATE PROCEDURE spObtenerDetallePedidoActual
 	@pedido_id int
 AS
 BEGIN
-   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad, i.precio 
+   select pd.id, pd.insumo_id as insumo_id, pd.pedido_id, pd.cantidad, i.precio, i.nombre 
    from pedidos_detalle pd 
    inner join insumos i on pd.insumo_id = i.id
    where pd.pedido_id = @pedido_id
@@ -653,8 +636,5 @@ BEGIN
 	end
 END
 GO
-
-select * from pedidos_detalle where pedido_id = 5
-exec spObtenerTotalDetallePedidoID 5
 
 
